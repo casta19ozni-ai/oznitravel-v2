@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OZNITRAVEL – Admin CRM</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0B1D3E;
+            color: #111827;
+        }
+
+        .shell {
+            max-width: 1100px;
+            margin: 2rem auto;
+            background: #f9fafb;
+            border-radius: 12px;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.45);
+            padding: 1.75rem 2rem 2.25rem;
+        }
+
+        h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.75rem;
+            color: #0B1D3E;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            color: #9ca3af;
+            margin-bottom: 1.75rem;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0.75rem 1rem;
+            margin-bottom: 1.25rem;
+            align-items: end;
+        }
+
+        label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #4b5563;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.45rem 0.55rem;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            font-size: 0.85rem;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.55rem 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-primary {
+            background: #D4AF37;
+            color: #0B1D3E;
+        }
+
+        .btn-secondary {
+            background: #0B1D3E;
+            color: #f9fafb;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            gap: 0.75rem;
+        }
+
+        .stats {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 0.8rem;
+        }
+
+        th,
+        td {
+            padding: 0.5rem 0.65rem;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f3f4f6;
+            text-align: left;
+            font-size: 0.75rem;
+            color: #4b5563;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 0.1rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .badge-action {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-device {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.72rem;
+            white-space: nowrap;
+        }
+
+        .actions-summary {
+            font-size: 0.76rem;
+            color: #4b5563;
+        }
+
+        .loading-indicator {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            .shell {
+                margin: 0;
+                border-radius: 0;
+                padding: 1.25rem 1rem 1.75rem;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <h1>Panel CRM OZNITRAVEL</h1>
+        <div class="subtitle">Lead Center · Uso interno</div>
+
+        <div class="filters">
+            <div>
+                <label for="dateFrom">Desde (fecha)</label>
+                <input type="date" id="dateFrom" />
+            </div>
+            <div>
+                <label for="dateTo">Hasta (fecha)</label>
+                <input type="date" id="dateTo" />
+            </div>
+            <div>
+                <label for="actionFilter">Acción</label>
+                <select id="actionFilter">
+                    <option value="">Todas</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Descargar App">Descargar App</option>
+                    <option value="Destino">Destino</option>
+                    <option value="Formulario">Formulario</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="applyFiltersBtn" type="button">Aplicar filtros</button>
+            </div>
+            <div>
+                <button class="btn btn-secondary" id="exportCsvBtn" type="button">Exportar CSV</button>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <div>
+                <div class="stats" id="statsText">0 leads</div>
+                <div class="actions-summary" id="actionsSummary"></div>
+            </div>
+            <div class="loading-indicator" id="loadingIndicator" style="opacity:0;">Cargando…</div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha / Hora</th>
+                    <th>Contacto</th>
+                    <th>Destino</th>
+                    <th>Acción</th>
+                    <th>Origen</th>
+                    <th>Dispositivo</th>
+                    <th>IP</th>
+                </tr>
+            </thead>
+            <tbody id="leadsBody">
+                <tr>
+                    <td colspan="7" style="text-align:center; padding: 1.25rem; color:#9ca3af;">
+                        Cargando datos…
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let ADMIN_TOKEN = null;
+        let IS_LOADING = false;
+
+        async function ensureAdminToken() {
+            if (ADMIN_TOKEN) return ADMIN_TOKEN;
+            const token = window.prompt('Ingrese token de administrador');
+            if (!token) {
+                alert('Token requerido para acceder al CRM.');
+                return null;
+            }
+            ADMIN_TOKEN = token;
+            return ADMIN_TOKEN;
+        }
+
+        async function fetchLeads({ format = 'json', signal } = {}) {
+            const token = await ensureAdminToken();
+            if (!token) return null;
+
+            const from = document.getElementById('dateFrom').value || '';
+            const to = document.getElementById('dateTo').value || '';
+            const accion = document.getElementById('actionFilter').value || '';
+
+            const params = new URLSearchParams();
+            if (from) params.append('from', from);
+            if (to) params.append('to', to);
+            if (accion) params.append('accion', accion);
+            if (format) params.append('format', format);
+
+            const res = await fetch(`/api/leads?${params.toString()}`, {
+                headers: {
+                    'x-admin-token': token
+                },
+                signal
+            });
+
+            if (!res.ok) {
+                if (res.status === 401) {
+                    ADMIN_TOKEN = null;
+                    alert('Token inválido o expirado.');
+                    return null;
+                }
+                throw new Error('Error al cargar leads');
+            }
+
+            if (format === 'csv') {
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'leads.csv';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+                return null;
+            }
+
+            const data = await res.json();
+            return data;
+        }
+
+        function renderLeads(response) {
+            const tbody = document.getElementById('leadsBody');
+            const statsText = document.getElementById('statsText');
+            const actionsSummary = document.getElementById('actionsSummary');
+
+            const leads = response && Array.isArray(response.leads) ? response.leads : [];
+            const total = response && typeof response.total === 'number' ? response.total : leads.length;
+            const perAction = response && Array.isArray(response.perAction) ? response.perAction : [];
+
+            if (!leads || leads.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 1.25rem; color:#9ca3af;">Sin registros para los filtros seleccionados.</td></tr>';
+                statsText.textContent = '0 leads';
+                actionsSummary.textContent = '';
+                return;
+            }
+
+            statsText.textContent = `${total} lead${total !== 1 ? 's' : ''}`;
+
+            if (perAction.length > 0) {
+                const summaryText = perAction
+                    .map((item) => `${item.accion || 'Sin acción'}: ${item.total}`)
+                    .join(' · ');
+                actionsSummary.textContent = summaryText;
+            } else {
+                actionsSummary.textContent = '';
+            }
+
+            tbody.innerHTML = leads
+                .map((lead) => {
+                    const fecha = lead.fecha_hora ? new Date(lead.fecha_hora) : null;
+                    const fechaTexto = fecha
+                        ? fecha.toLocaleString('es-EC', {
+                              dateStyle: 'short',
+                              timeStyle: 'short'
+                          })
+                        : '-';
+
+                    const nombre = lead.nombre || '(sin nombre)';
+                    const contacto = [
+                        `<div>${nombre}</div>`,
+                        lead.email ? `<div class="mono">${lead.email}</div>` : '',
+                        lead.telefono ? `<div class="mono">${lead.telefono}</div>` : ''
+                    ]
+                        .filter(Boolean)
+                        .join('');
+
+                    const destino = lead.destino || '-';
+                    const accion = lead.accion || '-';
+                    const origen = lead.origen || '-';
+
+                    const dispositivo = lead.dispositivo || '-';
+                    const so = lead.sistema_operativo || '';
+                    const nav = lead.navegador || '';
+
+                    const ip = lead.ip || '-';
+
+                    return `
+                        <tr>
+                            <td>${fechaTexto}</td>
+                            <td>${contacto}</td>
+                            <td>${destino}</td>
+                            <td><span class="badge badge-action">${accion}</span></td>
+                            <td>${origen}</td>
+                            <td>
+                                <div class="badge badge-device">${dispositivo}</div>
+                                <div style="font-size:0.7rem; color:#6b7280; margin-top:0.15rem;">${so} · ${nav}</div>
+                            </td>
+                            <td class="mono">${ip}</td>
+                        </tr>
+                    `;
+                })
+                .join('');
+        }
+
+        async function loadLeads() {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const tbody = document.getElementById('leadsBody');
+
+            try {
+                IS_LOADING = true;
+                loadingIndicator.style.opacity = 1;
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 1.25rem; color:#9ca3af;">Cargando datos…</td></tr>';
+
+                const controller = new AbortController();
+                const response = await fetchLeads({ format: 'json', signal: controller.signal });
+                if (response) renderLeads(response);
+            } catch (e) {
+                console.error(e);
+                alert('Error cargando leads.');
+            } finally {
+                IS_LOADING = false;
+                loadingIndicator.style.opacity = 0;
+            }
+        }
+
+        document.getElementById('applyFiltersBtn').addEventListener('click', () => {
+            loadLeads();
+        });
+
+        document.getElementById('exportCsvBtn').addEventListener('click', async () => {
+            try {
+                await fetchLeads({ format: 'csv' });
+            } catch (e) {
+                console.error(e);
+                alert('Error exportando CSV.');
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadLeads();
+        });
+    </script>
+</body>
+</html>
+

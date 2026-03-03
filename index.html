@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OZNITRAVEL - Conserjería de viajes de ultra lujo, membresías Travorium, y experiencias VIP Crew on Shore en Guayaquil">
+    <meta name="theme-color" content="#0B1D3E">
+    <title>OZNITRAVEL - Diseñamos Tu Viaje de Lujo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #F8F6F3;
+            color: #1A1A1A;
+        }
+
+        .luxury-heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .gold-text {
+            color: #D4AF37;
+        }
+
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(11, 29, 62, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-menu {
+            display: none;
+            gap: 2rem;
+        }
+
+        .nav-menu.active {
+            display: flex;
+        }
+
+        .nav-contact-wrapper {
+            position: relative;
+        }
+
+        .contact-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #0A192F;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            min-width: 220px;
+            display: none;
+            z-index: 1500;
+        }
+
+        .contact-dropdown.active {
+            display: block;
+        }
+
+        .contact-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-size: 0.85rem;
+            text-decoration: none;
+            margin-bottom: 0.35rem;
+        }
+
+        .contact-dropdown a:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-dropdown-icon {
+            color: #C5A059;
+            font-weight: 700;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-menu {
+                display: flex;
+            }
+
+            .nav-actions {
+                gap: 1.5rem;
+            }
+        }
+
+        .nav-link {
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #D4AF37;
+        }
+
+        .btn-gold {
+            background: #D4AF37;
+            color: #0B1D3E;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+            border-radius: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-download-app {
+            font-size: 0.75rem;
+            padding: 0.6rem 1.2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            white-space: nowrap;
+        }
+
+        .btn-gold:hover {
+            background: #E5D5A8;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #D4AF37;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #D4AF37;
+            color: #0B1D3E;
+        }
+
+        .hero {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #0B1D3E 0%, #1E3A5F 100%);
+            z-index: 1;
+        }
+
+        .hero-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: url('fondo.jpg');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(11, 29, 62, 0.06),
+                rgba(11, 29, 62, 0.22)
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+            text-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-style: italic;
+            color: white;
+            margin-bottom: 3rem;
+            letter-spacing: 0.02em;
+            text-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            overflow-y: auto;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 0;
+            max-width: 900px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #D4AF37;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #0B1D3E;
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            color: #0B1D3E;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 3rem;
+        }
+
+        .window-card {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            cursor: pointer;
+            background: #0B1D3E;
+            transition: all 0.3s;
+        }
+
+        .window-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .window-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .window-card:hover img {
+            opacity: 1;
+        }
+
+        .window-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(11, 29, 62, 0.95), transparent);
+            padding: 2rem 1.5rem;
+            color: white;
+        }
+
+        .window-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #D4AF37;
+        }
+
+        .window-desc {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #E5D5A8;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            scroll-behavior: smooth;
+        }
+
+        .carousel-item {
+            flex: 0 0 calc(100% - 1rem);
+            height: 250px;
+            background: #0B1D3E;
+            border-radius: 0;
+            padding: 2rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .carousel-item {
+                flex: 0 0 calc(33.333% - 1rem);
+            }
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.05);
+            background: #D4AF37;
+            color: #0B1D3E;
+        }
+
+        .carousel-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .carousel-item p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-left: 4px solid #D4AF37;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #0B1D3E;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Crew on Shore: cards con imagen full-bleed + overlay */
+        #crew-on-shore .grid-3 .card {
+            position: relative !important;
+            height: 320px !important;
+            overflow: hidden !important;
+            border-radius: 16px !important;
+            padding: 0 !important;
+            background-color: transparent !important;
+            border-left: 0 !important;
+            box-shadow: 0 12px 28px rgba(11, 29, 62, 0.18) !important;
+            transform: translateZ(0);
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+        }
+
+        #crew-on-shore .grid-3 .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 38px rgba(11, 29, 62, 0.22) !important;
+        }
+
+        #crew-on-shore .grid-3 .card > div {
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            padding: 20px !important;
+            z-index: 2 !important;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)) !important;
+            margin: 0 !important;
+            border-bottom-left-radius: 16px !important;
+            border-bottom-right-radius: 16px !important;
+        }
+
+        #crew-on-shore .grid-3 .card h3 {
+            color: #fff !important;
+            margin: 0 0 0.45rem 0 !important;
+            text-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+        }
+
+        #crew-on-shore .grid-3 .card p {
+            color: rgba(255, 255, 255, 0.92) !important;
+            margin: 0 !important;
+            font-size: 0.9rem !important;
+            line-height: 1.35 !important;
+            text-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0B1D3E;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #DDD;
+            border-bottom: 2px solid #D4AF37;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom: 2px solid #0B1D3E;
+        }
+
+        .footer {
+            background: #0B1D3E;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            font-size: 0.85rem;
+            color: #E5D5A8;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #D4AF37;
+        }
+
+        .affiliate-badge {
+            display: inline-block;
+            background: #D4AF37;
+            color: #0B1D3E;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .crm-section {
+            background: #0B1D3E;
+            color: white;
+            display: none;
+        }
+
+        .crm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .crm-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .crm-box:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: #D4AF37;
+        }
+
+        .crm-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #D4AF37;
+        }
+
+        .crm-box p {
+            font-size: 0.8rem;
+            color: #E5D5A8;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #0B1D3E, #1E3A5F);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            border-radius: 0;
+            margin-bottom: 2rem;
+            border: 2px dashed #D4AF37;
+        }
+
+        .membership-badge {
+            display: inline-block;
+            background: #D4AF37;
+            color: #0B1D3E;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+        }
+
+        .discount-label {
+            background: #D4AF37;
+            color: #0B1D3E;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 3rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Crew On Shore – card contenedor interactivo */
+        .crew-on-shore-card {
+            background: white;
+            border-left: 4px solid #D4AF37;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 100%;
+            transition: box-shadow 0.3s;
+        }
+
+        .crew-on-shore-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .crew-on-shore-card .crew-card-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0B1D3E;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .crew-on-shore-card .crew-card-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .crew-on-shore-card .crew-video-wrap {
+            width: 100%;
+            margin-bottom: 1rem;
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        .crew-on-shore-card .crew-video-wrap video {
+            width: 100%;
+            display: block;
+        }
+
+        .crew-unmute-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #D4AF37;
+            color: #0B1D3E;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .crew-unmute-btn:hover {
+            background: #E5D5A8;
+            transform: scale(1.03);
+            box-shadow: 0 6px 16px rgba(212, 175, 55, 0.35);
+        }
+
+        .crew-unmute-btn:disabled {
+            cursor: default;
+            opacity: 0.85;
+            transform: none;
+        }
+    </style>
+    <script>
+    (function () {
+      var script = document.createElement("script");
+      script.async = 1;
+      script.type = "module";
+      script.src = "https://tpwgts.com/wl_web/main.js?wl_id=2947";
+      document.head.appendChild(script);
+    })();
+    </script>
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="scrollToTop()">OZNITRAVEL</div>
+            <div class="nav-actions">
+                <div class="nav-menu" id="navMenu">
+                    <a class="nav-link" onclick="toggleModal('membershipModal')">Membresías</a>
+                    <a class="nav-link" href="#crew-on-shore">Crew on Shore</a>
+                    <a class="nav-link" onclick="toggleModal('conciergeModal')">Conserje</a>
+                    <div class="nav-contact-wrapper">
+                        <a class="nav-link" href="javascript:void(0)" onclick="toggleContactDropdown()">Contacto</a>
+                        <div id="contactDropdown" class="contact-dropdown">
+                            <a href="https://wa.me/593983977320" target="_blank" rel="noopener">
+                                <span class="contact-dropdown-icon">☎</span>
+                                <span>0983977320 (WhatsApp)</span>
+                            </a>
+                            <a href="mailto:crewonshore@gmail.com">
+                                <span class="contact-dropdown-icon">✉</span>
+                                <span>crewonshore@gmail.com</span>
+                            </a>
+                        </div>
+                    </div>
+                    <a class="nav-link" href="#about">Quiénes Somos</a>
+                </div>
+                <button class="btn-gold nav-download-app" type="button" onclick="handleAppDownload()">Descargar App</button>
+                <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-image"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">OZNI<span style="color: #D4AF37;">TRAVEL</span></h1>
+            <p class="hero-subtitle">Viajes de lujo con ahorros de <span style="color: #C5A059;">hasta el 60%</span>. Diseñamos el viaje que te mereces con membresías exclusivas.</p>
+            <div class="hero-buttons">
+                <button class="btn-gold" onclick="toggleModal('membershipModal'); trackEvent('hero_membership_click')">Quiero ahorrar en viajes</button>
+                <a href="#crew-on-shore" class="btn-outline" onclick="trackEvent('hero_crew_click')" style="text-decoration: none; display: inline-block;">Crew on Shore</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT / QUIÉNES SOMOS -->
+    <section id="about" class="section" style="background: #0B1D3E; color: white;">
+        <div style="max-width: 850px; margin: 0 auto; text-align: center;">
+            <p style="margin-bottom: 1.5rem;">
+                OZNITRAVEL es el puente entre tus sueños y los destinos más exclusivos del mundo. Nos especializamos en brindar acceso a viajes de lujo a través de nuestro
+                <strong style="color: #C5A059;">Servicio de Membresía</strong>, permitiendo a nuestros clientes ahorrar
+                <strong style="color: #C5A059;">hasta un 60%</strong> en hoteles, resorts y experiencias alrededor del mundo.
+            </p>
+            <p>
+                Complementamos cada aventura con <strong style="color: #C5A059;">Crew On Shore</strong>, nuestro servicio de soporte en destino diseñado
+                <strong style="color: #C5A059;">exclusivamente para tripulantes</strong> y personal de cruceros. Nos encargamos de la logística, traslados y asistencia personalizada en cada puerto,
+                garantizando que el personal de a bordo disfrute de su tiempo en tierra con total comodidad y sin preocupaciones.
+            </p>
+        </div>
+    </section>
+
+    <!-- MODAL MEMBRESÍAS TRAVORIUM -->
+    <div id="membershipModal" class="modal" onclick="closeModalOnBgClick(event, 'membershipModal')">
+        <div class="modal-content">
+            <span class="modal-close" onclick="toggleModal('membershipModal')">&times;</span>
+            <h2 class="section-title">Membresías Travorium</h2>
+            <p class="section-subtitle">ACCESO GLOBAL A VIAJES DE LUJO CON AHORRO DIRECTO DE HASTA EL 60%</p>
+
+            <h3 style="margin-top: 2rem; color: #0B1D3E; font-family: 'Playfair Display', serif; font-size: 1.5rem;">Video Promocional</h3>
+            <div style="margin: 0 0 2rem 0; padding: 0; border-radius: 0; overflow: hidden;">
+                <video
+                    src="travorium.mp4"
+                    autoplay
+                    loop
+                    playsinline
+                    muted
+                    controls
+                    style="width: 100%; display: block;">
+                </video>
+            </div>
+
+            <div class="carousel">
+                <div class="carousel-item">
+                    <h3>PLATINUM</h3>
+                    <p>Máximo nivel de ahorro y máxima acumulación de puntos mensuales. Acceso VIP prioritario a World Tours con las mejores tarifas del mercado.</p>
+                    <div class="membership-badge">ELITE</div>
+                </div>
+                <div class="carousel-item">
+                    <h3>TITANIUM</h3>
+                    <p>Ahorros de hasta el 60% más acumulación mensual de puntos de viaje. Incluye acceso a Getaways y World Tours con tarifas preferenciales.</p>
+                    <div class="membership-badge">POPULAR</div>
+                </div>
+                <div class="carousel-item">
+                    <h3>SILVER</h3>
+                    <p>Acceso a miles de hoteles y resorts exclusivos en todo el mundo. La base ideal para comenzar a viajar de forma inteligente.</p>
+                    <div class="membership-badge">INICIO</div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn-gold" onclick="handleWhatsApp('Quiero información sobre membresía Travorium'); trackEvent('membership_whatsapp')">Solicitar Membresía</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION CREW ON SHORE – card contenedor interactivo -->
+    <section id="crew-on-shore" class="section" style="background: #F8F6F3;">
+        <div class="crew-on-shore-card">
+            <h2 class="crew-card-header">CREW ON SHORE</h2>
+            <p class="crew-card-subtitle">EXCLUSIVE CREW EXPERIENCES IN KEY DESTINATIONS</p>
+            <p>Currently available in Guayaquil, with progressive expansion to other ports in Ecuador and Latin America.</p>
+
+            <div class="crew-video-wrap">
+                <video
+                    id="crewVideo"
+                    src="crew.mp4"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    style="border-radius: 0;">
+                </video>
+            </div>
+
+            <button
+                id="crewVideoUnmuteBtn"
+                class="crew-unmute-btn"
+                type="button"
+                onclick="crewVideoUnmute()">
+                Activar sonido
+            </button>
+
+            <h3 style="color: #0B1D3E; font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 2rem 0 1rem;">Select the type of experience you want at your next port</h3>
+
+            <div class="grid-3" style="max-width: 1200px; margin: 0 auto; gap: 2.5rem;">
+                <div class="card" onclick="handleWhatsApp('Me interesa tour por Malecón 2000'); trackEvent('crew_malecon')" style="background-image: url('riverfront.jpg');">
+                    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.25)); border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;">
+                        <h3 style="color: #fff; margin: 0 0 0.5rem 0;">🏛️ Riverfront City Walks</h3>
+                        <p style="color: #f5f5f5; margin: 0; font-size: 0.9rem;">Scenic riverfront walks, gastronomy, leisure areas and optional river rides with music.</p>
+                    </div>
+                </div>
+                <div class="card" onclick="handleWhatsApp('Me interesa visitar Palacio de Cristal'); trackEvent('crew_palacio')" style="background-image: url('cultural.jpg');">
+                    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.25)); border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;">
+                        <h3 style="color: #fff; margin: 0 0 0.5rem 0;">🏢 Cultural & Event Venues</h3>
+                        <p style="color: #f5f5f5; margin: 0; font-size: 0.9rem;">Exhibitions, fairs, cultural events and gastronomic experiences in iconic venues.</p>
+                    </div>
+                </div>
+                <div class="card" onclick="handleWhatsApp('Me interesa Cerro Santa Ana'); trackEvent('crew_cerro')" style="background-image: url('historic.jpg');">
+                    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.25)); border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;">
+                        <h3 style="color: #fff; margin: 0 0 0.5rem 0;">⛪ Viewpoints & Historic Districts</h3>
+                        <p style="color: #f5f5f5; margin: 0; font-size: 0.9rem;">Panoramic viewpoints, heritage neighborhoods and cultural experiences.</p>
+                    </div>
+                </div>
+                <div class="card" onclick="handleWhatsApp('Me interesa Parque de las Iguanas'); trackEvent('crew_iguanas')" style="background-image: url('wildlife.jpg');">
+                    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.25)); border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;">
+                        <h3 style="color: #fff; margin: 0 0 0.5rem 0;">🦎 Urban Wildlife & Nature Parks</h3>
+                        <p style="color: #f5f5f5; margin: 0; font-size: 0.9rem;">Safe interaction with local wildlife and emblematic city parks.</p>
+                    </div>
+                </div>
+                <div class="card" onclick="handleWhatsApp('Me interesa ecoturismo Cerro Blanco'); trackEvent('crew_ecoturismo')" style="background-image: url('ecotourism.jpg');">
+                    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.25)); border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;">
+                        <h3 style="color: #fff; margin: 0 0 0.5rem 0;">🌿 Ecotourism & Natural Reserves</h3>
+                        <p style="color: #f5f5f5; margin: 0; font-size: 0.9rem;">Protected nature areas, trails and sustainable experiences.</p>
+                    </div>
+                </div>
+                <div class="card" onclick="handleWhatsApp('Me interesa shopping en Guayaquil'); trackEvent('crew_shopping')" style="background-image: url('shopping.jpg');">
+                    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.25)); border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;">
+                        <h3 style="color: #fff; margin: 0 0 0.5rem 0;">🛍️ VIP Shopping Experiences</h3>
+                        <p style="color: #f5f5f5; margin: 0; font-size: 0.9rem;">Access to boutiques, international brands and selected outlets.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn-gold" onclick="handleWhatsApp('Quiero reservar Crew on Shore'); trackEvent('crew_reserve')">BOOK EXPERIENCE VIA WHATSAPP</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL CONSERJE -->
+    <div id="conciergeModal" class="modal" onclick="closeModalOnBgClick(event, 'conciergeModal')">
+        <div class="modal-content">
+            <span class="modal-close" onclick="toggleModal('conciergeModal')">&times;</span>
+            <h2 class="section-title">Servicio de Conserje</h2>
+            <p class="section-subtitle">Planificación personalizada de tu viaje de ensueño</p>
+
+            <form onsubmit="handleConciergeForm(event)">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" name="name" required placeholder="Juan Pérez">
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" name="email" required placeholder="juan@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" name="phone" required placeholder="+593 98 XXX XXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de Membresía</label>
+                        <select name="membership" required>
+                            <option>Platinum</option>
+                            <option>Titanium</option>
+                            <option>Silver</option>
+                            <option>No tengo aún</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Cuál es tu destino ideal?</label>
+                    <input type="text" name="destination" required placeholder="Ej: Maldivas, Dubai, París...">
+                </div>
+
+                <div class="form-group">
+                    <label>Cuéntanos tus preferencias</label>
+                    <textarea name="preferences" required placeholder="Tipo de viaje, fechas, presupuesto, preferencias gastronómicas..." rows="5"></textarea>
+                </div>
+
+                <button type="submit" class="btn-gold" style="width: 100%; padding: 1rem;">Enviar Consulta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SECTION: VENTANAS DE LIBERTAD / DESTINOS -->
+    <section class="section" style="background: #F8F6F3; color: #0B1D3E;">
+        <h2 class="section-title" style="color: #0B1D3E;">Experiencias Privadas Globales</h2>
+        <p class="section-subtitle">Los destinos más exclusivos de la red Travorium</p>
+        <p style="max-width: 720px; margin: 0.5rem auto 1.25rem; font-size: 0.9rem; text-align: center; color: #666;">
+            Más de 2.000 destinos reales disponibles dentro de la red Travorium en todo el mundo, con alojamientos curados y experiencias privadas.
+        </p>
+        <div style="text-align: center; margin-bottom: 1.5rem; font-size: 0.8rem; cursor: pointer; color: #0B1D3E;" onclick="toggleDestinationsList()">
+            <span style="display: inline-block; transform: translateY(1px); margin-right: 0.35rem;">▼</span>
+            <span>Ver destinos disponibles</span>
+        </div>
+        <div id="travoriumDestinations" style="display: none; max-width: 820px; margin: 0 auto 2rem; font-size: 0.85rem; background: #ffffff; border-radius: 14px; padding: 1rem 1.25rem; box-shadow: 0 8px 20px rgba(0,0,0,0.08);">
+            <div style="margin-bottom: 0.35rem; font-weight: 700; color: #0B1D3E;">Europa</div>
+            <ul style="list-style: none; padding: 0; margin: 0 0 1rem 0;">
+                <li style="margin-bottom: 0.35rem;">
+                    <button type="button" onclick="openDestinationWhatsApp('París, Francia', 'Información')" style="background: none; border: none; color: #0B1D3E; cursor: pointer; text-decoration: underline; padding: 0; font: inherit;">
+                        París, Francia
+                    </button>
+                </li>
+                <li style="margin-bottom: 0.35rem;">
+                    <button type="button" onclick="openDestinationWhatsApp('Santorini, Grecia', 'Información')" style="background: none; border: none; color: #0B1D3E; cursor: pointer; text-decoration: underline; padding: 0; font: inherit;">
+                        Santorini, Grecia
+                    </button>
+                </li>
+                <li style="margin-bottom: 0.35rem;">
+                    <button type="button" onclick="openDestinationWhatsApp('Marrakech, Marruecos', 'Información')" style="background: none; border: none; color: #0B1D3E; cursor: pointer; text-decoration: underline; padding: 0; font: inherit;">
+                        Marrakech, Marruecos
+                    </button>
+                </li>
+            </ul>
+
+            <div style="margin-bottom: 0.35rem; font-weight: 700; color: #0B1D3E;">Américas</div>
+            <ul style="list-style: none; padding: 0; margin: 0 0 1rem 0;">
+                <li style="margin-bottom: 0.35rem;">
+                    <button type="button" onclick="openDestinationWhatsApp('Cancún, México', 'Información')" style="background: none; border: none; color: #0B1D3E; cursor: pointer; text-decoration: underline; padding: 0; font: inherit;">
+                        Cancún, México
+                    </button>
+                </li>
+                <li style="margin-bottom: 0.35rem;">
+                    <button type="button" onclick="openDestinationWhatsApp('Orlando, Estados Unidos', 'Información')" style="background: none; border: none; color: #0B1D3E; cursor: pointer; text-decoration: underline; padding: 0; font: inherit;">
+                        Orlando, Estados Unidos
+                    </button>
+                </li>
+                <li style="margin-bottom: 0.35rem;">
+                    <button type="button" onclick="openDestinationWhatsApp('Punta Cana, República Dominicana', 'Información')" style="background: none; border: none; color: #0B1D3E; cursor: pointer; text-decoration: underline; padding: 0; font: inherit;">
+                        Punta Cana, República Dominicana
+                    </button>
+                </li>
+            </ul>
+
+            <div style="margin-bottom: 0.35rem; font-weight: 700; color: #0B1D3E;">Asia & Pacífico</div>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="margin-bottom: 0.35rem;">
+                    <button type="button" onclick="openDestinationWhatsApp('Maldivas', 'Información')" style="background: none; border: none; color: #0B1D3E; cursor: pointer; text-decoration: underline; padding: 0; font: inherit;">
+                        Maldivas
+                    </button>
+                </li>
+                <li style="margin-bottom: 0.35rem;">
+                    <button type="button" onclick="openDestinationWhatsApp('Dubái, Emiratos Árabes Unidos', 'Información')" style="background: none; border: none; color: #0B1D3E; cursor: pointer; text-decoration: underline; padding: 0; font: inherit;">
+                        Dubái, Emiratos Árabes Unidos
+                    </button>
+                </li>
+                <li style="margin-bottom: 0.35rem;">
+                    <button type="button" onclick="openDestinationWhatsApp('Tokio, Japón', 'Información')" style="background: none; border: none; color: #0B1D3E; cursor: pointer; text-decoration: underline; padding: 0; font: inherit;">
+                        Tokio, Japón
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="grid-3">
+            <div class="window-card" onclick="trackEvent('destination_dubai')">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=500&q=80" alt="Dubai - Burj Al Arab">
+                <div class="window-overlay">
+                    <div class="window-title">Dubai</div>
+                    <div class="window-desc">Ahorro de $3,200+ vs Expedia con tarifa neta Travorium.</div>
+                    <div class="discount-label">AHORRO 70%</div>
+                </div>
+            </div>
+
+            <div class="window-card" onclick="trackEvent('destination_santorini')">
+                <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=500&q=80" alt="Santorini - Grecia">
+                <div class="window-overlay">
+                    <div class="window-title">Santorini</div>
+                    <div class="window-desc">5 estrellas pagada con puntos acumulados mensualmente.</div>
+                    <div class="discount-label">TITANIUM</div>
+                </div>
+            </div>
+
+            <div class="window-card" onclick="trackEvent('destination_maldivas')">
+                <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=500&q=80" alt="Maldivas - Overwater">
+                <div class="window-overlay">
+                    <div class="window-title">Maldivas</div>
+                    <div class="window-desc">Bungalows privados. Sin comisiones intermediarias.</div>
+                    <div class="discount-label">TARIFA NETA</div>
+                </div>
+            </div>
+
+            <div class="window-card" onclick="trackEvent('destination_paris')">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=500&q=80" alt="París - Francia">
+                <div class="window-overlay">
+                    <div class="window-title">París</div>
+                    <div class="window-desc">Hoteles boutique de Rive Gauche con desayuno incluido.</div>
+                    <div class="discount-label">PREMIUM</div>
+                </div>
+            </div>
+
+            <div class="window-card" onclick="trackEvent('destination_tokyo')">
+                <img src="https://images.unsplash.com/photo-1540959375944-7049f642e9a0?auto=format&fit=crop&w=500&q=80" alt="Tokio - Japón">
+                <div class="window-overlay">
+                    <div class="window-title">Tokio</div>
+                    <div class="window-desc">Ryokans de lujo en Hakone con experiencia onsen privada.</div>
+                    <div class="discount-label">PLATINUM</div>
+                </div>
+            </div>
+
+            <div class="window-card" onclick="trackEvent('destination_marrakech')">
+                <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=500&q=80" alt="Marrakech - Marruecos">
+                <div class="window-overlay">
+                    <div class="window-title">Marrakech</div>
+                    <div class="window-desc">Riads de lujo con experiencias gastronómicas auténticas.</div>
+                    <div class="discount-label">EXPERIENCIA</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: PASARELAS Y AFILIADOS -->
+    <section class="section">
+        <h2 class="section-title">Servicios Adicionales</h2>
+        <p class="section-subtitle">Acceso a las mejores plataformas de viajes y experiencias del mundo</p>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>✈️ Vuelos Internacionales</h3>
+                <p>Motor de búsqueda de vuelos en tiempo real con tarifas en red. Comparativa instantánea de cientos de aerolíneas.</p>
+                <a class="btn-gold" href="https://kiwi.tpo.lv/9zKWdXYg" target="_blank" rel="noopener noreferrer" onclick="trackEvent('affiliate_kiwi')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Buscar Vuelos con Kiwi</a>
+            </div>
+
+            <div class="card">
+                <h3>🎫 Actividades y Tours</h3>
+                <p>Experiencias verificadas en destinos globales. Desde aventura extrema hasta gastronomía gourmet. Cancelación flexible.</p>
+                <a class="btn-gold" href="https://klook.tpo.lv/Jn8BIcoZ" target="_blank" rel="noopener noreferrer" onclick="trackEvent('affiliate_klook')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Explorar en Klook</a>
+            </div>
+
+            <div class="card">
+                <h3>🎭 Entradas VIP</h3>
+                <p>Acceso prioritario a museos, teatros y atracciones en todo el mundo. Evita colas con pases express.</p>
+                <a class="btn-gold" href="https://tiqets.tpo.lv/1hnzwtQk" target="_blank" rel="noopener noreferrer" onclick="trackEvent('affiliate_tiqets')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Ver Entradas</a>
+            </div>
+
+            <div class="card">
+                <h3>🚗 Autos de Alquiler</h3>
+                <p>Flota premium de vehículos con conductor. Desde Tesla hasta limusinas. Disponible en 150+ destinos.</p>
+                <a class="btn-gold" href="https://localrent.tpo.lv/Jl2Sejb8" target="_blank" rel="noopener noreferrer" onclick="trackEvent('affiliate_localrent')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Reservar Auto</a>
+            </div>
+
+            <div class="card">
+                <h3>📡 SIM Internacional</h3>
+                <p>Conectividad global sin roaming. Datos 5G en +150 países. Activa al llegar, sin contrato.</p>
+                <a class="btn-gold" href="https://yesim.tpo.lv/Zqz7mibK" target="_blank" rel="noopener noreferrer" onclick="trackEvent('affiliate_yesim')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Comprar SIM</a>
+            </div>
+
+            <div class="card">
+                <h3>🏨 Hoteles Premium</h3>
+                <p>Red de hoteles de 4-5 estrellas con tarifas net. Cancelación sin penalidad hasta 48h antes.</p>
+                <a class="btn-gold" href="https://app.travelpayouts.com/whitelabels/web/2947/code" target="_blank" rel="noopener noreferrer" onclick="trackEvent('affiliate_travelpayouts')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Ver Hoteles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: CRM MODULAR -->
+    <section class="section crm-section">
+        <h2 class="section-title" style="color: white;">Centro de Control CRM</h2>
+        <p class="section-subtitle">Gestión completa de tu experiencia Travorium</p>
+
+        <div class="crm-grid">
+            <div class="crm-box" onclick="openCRMModule('users'); trackEvent('crm_users')">
+                <h4>👥 Clientes</h4>
+                <p>Base de datos de usuarios, membresías activas e historial de transacciones.</p>
+            </div>
+
+            <div class="crm-box" onclick="openCRMModule('bookings'); trackEvent('crm_bookings')">
+                <h4>📅 Reservas</h4>
+                <p>Historial completo de reservas: pendiente, confirmada, completada, cancelada.</p>
+            </div>
+
+            <div class="crm-box" onclick="openCRMModule('concierge'); trackEvent('crm_concierge')">
+                <h4>🧑‍💼 Conserjería</h4>
+                <p>Solicitudes personalizadas, asignación de tareas, seguimiento en tiempo real.</p>
+            </div>
+
+            <div class="crm-box" onclick="openCRMModule('marketing'); trackEvent('crm_marketing')">
+                <h4>📧 Marketing</h4>
+                <p>Campañas segmentadas, métricas de conversión, automatizaciones por afiliado.</p>
+            </div>
+
+            <div class="crm-box" onclick="openCRMModule('analytics'); trackEvent('crm_analytics')">
+                <h4>📊 Analytics</h4>
+                <p>KPIs en tiempo real, ROI por afiliado, funnel de conversión premium.</p>
+            </div>
+
+            <div class="crm-box" onclick="openCRMModule('admin'); trackEvent('crm_admin')">
+                <h4>⚙️ Admin</h4>
+                <p>Configuración de roles, permisos, integraciones API y webhooks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: CONTACTO -->
+    <section id="contact" class="section" style="background: #F8F6F3;">
+        <h2 class="section-title">Contacto Directo</h2>
+        <p class="section-subtitle">Estamos disponibles 24/7 para ti</p>
+
+        <div class="grid-2" style="max-width: 600px; margin: 2rem auto;">
+            <div class="card">
+                <h3>📧 Email</h3>
+                <p>Consultas Generales</p>
+                <p style="font-weight: 700; color: #D4AF37;">oznitravelinfo@gmail.com</p>
+                <p style="margin-top: 1rem; font-size: 0.85rem;">Crew on Shore</p>
+                <p style="font-weight: 700; color: #D4AF37;">crewonshore@gmail.com</p>
+            </div>
+
+            <div class="card">
+                <h3>📱 WhatsApp</h3>
+                <p>Disponible 24/7 para reservas y consultas</p>
+                <p style="font-weight: 700; color: #D4AF37; font-size: 1.2rem;">+593 98 397 7320</p>
+                <button class="btn-gold" onclick="handleWhatsApp('Hola, quiero más información'); trackEvent('contact_whatsapp')" style="width: 100%; margin-top: 1rem;">Enviar Mensaje</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1rem;">OZNITRAVEL</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem;">Conserjería de viajes de ultra lujo | Membresías Travorium | Experiencias VIP Crew on Shore</p>
+
+            <div class="footer-links">
+                <span class="footer-link" onclick="scrollTo('about'); trackEvent('footer_about')">Quiénes Somos</span>
+                <span class="footer-link" onclick="goToVision(); trackEvent('footer_vision')">Nuestra Visión</span>
+                <span class="footer-link" onclick="goToMission(); trackEvent('footer_mission')">Nuestra Misión</span>
+                <span class="footer-link" onclick="openPrivacyPolicy(); trackEvent('footer_privacy')">Política de Privacidad</span>
+                <span class="footer-link" onclick="openTerms(); trackEvent('footer_terms')">Términos de Servicio</span>
+            </div>
+
+            <p style="margin-top: 2rem; font-size: 0.85rem; color: #E5D5A8;">© 2026 OZNITRAVEL. Todos los derechos reservados.</p>
+            <p style="font-size: 0.75rem; color: #D4AF37; margin-top: 0.5rem;">Ecuador 🇪🇨 | Guayaquil</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== CONFIGURACIÓN GLOBAL =====
+        const WHATSAPP_NUMBER = '593983977320';
+        const APP_DOWNLOAD_URL = 'https://app.oznitravel.com';
+
+        // ===== CRM INTERNO (NO VISIBLE) =====
+        async function sendLeadToApi(payload) {
+            try {
+                await fetch('/api/lead', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+            } catch (e) {
+                console.warn('Lead logging failed (non crítico)', e);
+            }
+        }
+
+        // ===== FUNCIONES DE MODALES =====
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal.classList.contains('active')) {
+                modal.classList.remove('active');
+            } else {
+                modal.classList.add('active');
+            }
+        }
+
+        function closeModalOnBgClick(event, modalId) {
+            const modal = document.getElementById(modalId);
+            if (event.target === modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // ===== NAVEGACIÓN =====
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollTo(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        function toggleContactDropdown() {
+            const dropdown = document.getElementById('contactDropdown');
+            if (!dropdown) return;
+            dropdown.classList.toggle('active');
+        }
+
+        // ===== CREW ON SHORE VIDEO =====
+        function crewVideoUnmute() {
+            const video = document.getElementById('crewVideo');
+            const btn = document.getElementById('crewVideoUnmuteBtn');
+            if (!video || !btn) return;
+
+            if (video.muted) {
+                video.muted = false;
+                btn.textContent = 'Silenciar sonido';
+            } else {
+                video.muted = true;
+                btn.textContent = 'Activar sonido';
+            }
+        }
+
+        function initCrewVideoAutoplay() {
+            const video = document.getElementById('crewVideo');
+            if (!video) return;
+            var p = video.play();
+            if (p && typeof p.catch === 'function') {
+                p.catch(function () {});
+            }
+        }
+
+        // ===== WHATSAPP HANDLING =====
+        function handleWhatsApp(message, meta = {}) {
+            const {
+                destination: destino = null,
+                actionType: accion = 'WhatsApp',
+                source: origen = null,
+                name: nombre = null,
+                email = null,
+                phone: telefono = null
+            } = meta || {};
+
+            sendLeadToApi({
+                nombre,
+                email,
+                telefono,
+                destino,
+                accion,
+                origen
+            });
+
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function handleAppDownload() {
+            sendLeadToApi({
+                nombre: null,
+                email: null,
+                telefono: null,
+                destino: null,
+                accion: 'Descargar App',
+                origen: 'header'
+            });
+            window.open(APP_DOWNLOAD_URL, '_blank');
+        }
+
+        // ===== FORMULARIOS =====
+        function handleConciergeForm(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const destination = formData.get('destination');
+            const preferences = formData.get('preferences');
+
+            const message = `Nueva solicitud de conserjería:\nNombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nDestino: ${destination}\nPreferencias: ${preferences}`;
+
+            sendLeadToApi({
+                nombre: name,
+                email: email,
+                telefono: phone,
+                destino: destination,
+                accion: 'Formulario',
+                origen: 'concierge_modal'
+            });
+
+            handleWhatsApp(message, {
+                destination: destination,
+                actionType: 'Formulario',
+                source: 'concierge_modal',
+                name: name,
+                email: email,
+                phone: phone
+            });
+            toggleModal('conciergeModal');
+            trackEvent('concierge_form_submit');
+        }
+
+        // ===== AFILIADOS =====
+        function openAffiliate(url) {
+            window.open(url, '_blank');
+        }
+
+        function openTravelpayouts() {
+            window.open('https://app.travelpayouts.com/whitelabels/web/2947/code', '_blank');
+        }
+
+        // ===== CRM =====
+        function openCRMModule(moduleName) {
+            alert(`Módulo CRM: ${moduleName.toUpperCase()}\n\nEste es un placeholder del módulo completo.\nEn producción se integraría con base de datos Supabase.\n\nNota: Implementar autenticación y permisos según rol.`);
+        }
+
+        // ===== INFORMACIÓN DE EMPRESA =====
+        function goToVision() {
+            alert('NUESTRA VISIÓN\n\nSer la plataforma número uno en Latinoamérica para viajeros que buscan experiencias premium, ahorro inteligente y servicios de conserjería personalizado.');
+        }
+
+        // ===== DESTINOS TRAVORIUM (LISTA INTERNA) =====
+        function toggleDestinationsList() {
+            const panel = document.getElementById('travoriumDestinations');
+            if (!panel) return;
+            panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+        }
+
+        function openDestinationWhatsApp(destinationName, actionType) {
+            const baseInfoMessage = `Hola, me interesa el destino ${destinationName}. ¿Podría enviarme información y disponibilidad?`;
+            let message = baseInfoMessage;
+
+            if (actionType === 'Información') {
+                message = `Hola, me interesa el destino ${destinationName}. ¿Podría enviarme más información, ejemplos de hoteles y detalles de la experiencia?`;
+            } else if (actionType === 'Disponibilidad') {
+                message = `Hola, me interesa la disponibilidad para el destino ${destinationName}. ¿Podría indicarme fechas, tarifas y opciones actuales?`;
+            }
+
+            handleWhatsApp(message, {
+                destination: destinationName,
+                actionType: actionType || 'Información',
+                source: 'destinations_section'
+            });
+        }
+
+        function goToMission() {
+            alert('NUESTRA MISIÓN\n\nFacilitar viajes extraordinarios mediante membresías Travorium, asesoría personalizada y acceso a experiencias VIP, eliminando intermediarios y maximizando ahorro.');
+        }
+
+        function openPrivacyPolicy() {
+            alert('POLÍTICA DE PRIVACIDAD\n\nTus datos están protegidos según GDPR. No compartimos información con terceros sin tu consentimiento.\n\nVer: [Enlace a página completa]');
+        }
+
+        function openTerms() {
+            alert('TÉRMINOS DE SERVICIO\n\nAl utilizar OZNITRAVEL aceptas nuestros términos. Todas las reservas están sujetas a disponibilidad y políticas de cada proveedor.\n\nVer: [Enlace a página completa]');
+        }
+
+        // ===== ANALÍTICA (PLACEHOLDERS GA4/MIXPANEL) =====
+        function trackEvent(eventName, eventParams = {}) {
+            // Placeholder para Google Analytics 4
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, eventParams);
+            }
+
+            // Placeholder para Mixpanel
+            if (typeof mixpanel !== 'undefined') {
+                mixpanel.track(eventName, eventParams);
+            }
+
+            console.log(`📊 Event: ${eventName}`, eventParams);
+        }
+
+        // ===== INICIALIZACIÓN =====
+        document.addEventListener('DOMContentLoaded', function() {
+            trackEvent('page_view');
+            initCrewVideoAutoplay();
+            var v = document.getElementById('crewVideo');
+            if (v) {
+                v.addEventListener('loadeddata', initCrewVideoAutoplay);
+            }
+            console.log('✅ OZNITRAVEL cargado correctamente');
+        });
+
+        // Cerrar modal al presionar ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
