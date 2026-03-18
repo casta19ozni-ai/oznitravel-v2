@@ -937,16 +937,14 @@
             <p class="section-subtitle" data-i18n="membership_subtitle">ACCESO GLOBAL A VIAJES DE LUJO CON AHORRO DIRECTO DE HASTA EL 60%</p>
 
             <h3 style="margin-top: 2rem; color: #0B1D3E; font-family: 'Playfair Display', serif; font-size: 1.5rem;" data-i18n="membership_video">Video Promocional</h3>
-            <div style="margin: 0 0 2rem 0; padding: 0; border-radius: 0; overflow: hidden;">
-                <video
-                    src="travorium.mp4"
-                    autoplay
-                    loop
-                    playsinline
-                    muted
-                    controls
-                    style="width: 100%; display: block;">
-                </video>
+            <div style="margin: 0 0 2rem 0; padding: 0; border-radius: 12px; overflow: hidden; height: 450px;">
+                <iframe 
+                    style="width:100%; height:100%; border-radius:12px;"
+                    src="https://www.youtube.com/embed/bhJ6HT_wV7A?autoplay=1&mute=1&loop=1&playlist=bhJ6HT_wV7A&controls=1&modestbranding=1&rel=0"
+                    frameborder="0"
+                    allow="autoplay"
+                    allowfullscreen>
+                </iframe>
             </div>
 
             <div class="carousel">
@@ -981,7 +979,7 @@
             <p data-i18n="crew_availability">Currently available in Guayaquil, with progressive expansion to other ports in Ecuador and Latin America.</p>
 
             <div class="crew-video-wrap">
-                <div id="crewVideo"></div>
+                <div id="crewVideo" style="width: 100%; max-width: 100%; display: block;"></div>
             </div>
 
             <button
