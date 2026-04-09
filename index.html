@@ -203,6 +203,25 @@
             align-items: center;
             justify-content: center;
         }
+        .hero-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 55%;
+}
 
         .hero-bg {
             position: absolute;
@@ -211,21 +230,7 @@
             top: 0;
             left: 0;
             background: linear-gradient(135deg, #0B1D3E 0%, #1E3A5F 100%);
-            z-index: 1;
-        }
-
-        .hero-image {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-image: url('fondo.jpg');
-            background-position: center center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            opacity: 1;
-            z-index: 1;
+            z-index: 0;
         }
 
         .hero-overlay {
@@ -898,20 +903,33 @@
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero" id="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-image"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">OZNI<span style="color: #D4AF37;">TRAVEL</span></h1>
-            <p class="hero-subtitle" data-i18n="hero_subtitle">Asistente Inteligente de Viajes 24/7<br>Vuelos • Hoteles • Experiencias • Transporte<br>en cualquier parte del mundo.</p>
-            <div class="hero-buttons">
-                <button class="btn-gold" onclick="toggleModal('membershipModal'); trackEvent('hero_membership_click')" data-i18n="hero_btn_save">Quiero ahorrar en viajes</button>
-                <a href="#crew-on-shore" class="btn-outline" onclick="trackEvent('hero_crew_click')" style="text-decoration: none; display: inline-block;" data-i18n="hero_btn_crew">Crew on Shore</a>
-            </div>
-        </div>
-    </section>
+ <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+
+    <div class="hero-image">
+        <video autoplay loop muted playsinline class="bg-video">
+            <source src="video-frontal.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1 class="hero-title">OZNI<span style="color: #D4AF37;">TRAVEL</span></h1>
+
+        <p class="hero-subtitle" data-i18n="hero_subtitle">
+            Asistente Inteligente de Viajes 24/7<br>
+            Vuelos • Hoteles • Experiencias • Transporte<br>
+            en cualquier parte del mundo.
+        </p>
+
+        <div class="hero-buttons">
+    <button class="btn-gold" onclick="toggleModal('membershipModal')">
+        Quiero ahorrar en viajes
+    </button>
+    <a href="#crew-on-shore" class="btn-outline">Crew on Shore</a>
+</div>
+</section>
 
     <!-- ABOUT / QUIÉNES SOMOS -->
     <section id="about" class="section" style="background: #0B1D3E; color: white;">
