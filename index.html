@@ -2145,5 +2145,15 @@ function toggleMenu() {
 }
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('navMenu').classList.remove('active');
+        });
+    });
+});
+</script>
+
 </body>
 </html>
