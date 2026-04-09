@@ -85,6 +85,11 @@
         .nav-contact-wrapper {
             position: relative;
         }
+        .nav-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
         .contact-dropdown {
             position: absolute;
@@ -122,6 +127,32 @@
             color: #C5A059;
             font-weight: 700;
         }
+        .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #0f1e3a;
+    min-width: 180px;
+    z-index: 1000;
+    border-radius: 8px;
+    padding: 10px 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #1c2f5c;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    display: block;
+}
 
         @media (min-width: 1024px) {
             .nav-menu {
@@ -940,7 +971,17 @@
             <a href="#hero" class="nav-logo">Inicio</a>
             <div class="nav-actions">
                 <div class="nav-menu" id="navMenu">
-                    <a class="nav-link" href="#services" data-i18n="nav_memberships">Bot de Viajes</a>
+<div class="nav-dropdown">
+    <span class="nav-link">Bot de Viajes</span>
+
+    <div class="dropdown-menu">
+        <a href="https://kiwi.tpo.lv/9zKWdXYg" target="_blank">✈️ Vuelos</a>
+        <a href="https://klook.tpo.lv/Jn8BIcoZ" target="_blank">🎫 Tours</a>
+        <a href="https://tpo.lv/Aicg51dl" target="_blank">🏨 Hoteles</a>
+        <a href="https://localrent.tpo.lv/Jl2Sejb8" target="_blank">🚗 Autos</a>
+        <a href="https://yesim.tpo.lv/Zqz7mibK" target="_blank">📡 SIM</a>
+    </div>
+</div>
                     <a class="nav-link" onclick="toggleModal('membershipModal')" data-i18n="nav_crew">Membresías</a>
                     <a class="nav-link" href="#crew-on-shore" data-i18n="nav_concierge">Crew On Shore</a>
                     <div class="nav-contact-wrapper">
