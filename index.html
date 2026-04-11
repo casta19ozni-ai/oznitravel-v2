@@ -207,18 +207,20 @@
         }
 
         .btn-outline {
-            background: transparent;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: 2px solid #D4AF37;
-            cursor: pointer;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-            transition: all 0.3s;
-        }
-
+    background: transparent;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #D4AF37;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s;
+}
+a.btn-outline {
+    text-decoration: none;
+}
         .btn-outline:hover {
             background: #D4AF37;
             color: #0B1D3E;
@@ -952,6 +954,9 @@
     padding: 12px 0;
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
+.nav-menu a.btn-outline {
+    border-bottom: none;
+}
 @media (max-width: 768px) {
     .services .grid-2  {
         grid-template-columns: 1fr;
@@ -964,7 +969,10 @@
         display: block !important;
     }
 }
-
+a.btn-outline,
+a.btn-outline:hover {
+  text-decoration: none;
+}
     </style>
     <script>
     (function () {
@@ -1045,9 +1053,9 @@
 
         <div class="hero-buttons">
     <button class="btn-gold" onclick="toggleModal('membershipModal')">
-        Quiero ahorrar en viajes
+        DESBLOQUEAR DESCUENTOS EXCLUSIVOS
     </button>
-    <a href="#crew-on-shore" class="btn-outline">Crew on Shore</a>
+    <a href="#crew-on-shore" class="btn-outline">Crew on Shore ⚓</a>
 </div>
 </section>
 
@@ -1799,7 +1807,7 @@
                 nav_about: 'Experiencias',
 
                 hero_subtitle: 'Asistente Inteligente de Viajes 24/7<br>Encuentra vuelos, hoteles, transporte y experiencias<br>desde cualquier parte del mundo.',
-                hero_btn_save: 'Quiero ahorrar en viajes',
+                hero_btn_save: 'DESBLOQUEAR DESCUENTOS EXCLUSIVOS',
                 hero_btn_crew: 'Crew on Shore ⚓',
 
                 about_p1: 'OZNITRAVEL es el puente entre tus sueños y los destinos más exclusivos del mundo. Nos especializamos en brindar acceso a viajes de lujo a través de nuestro <strong style="color: #C5A059;">Servicio de Membresía</strong>, permitiendo a nuestros clientes ahorrar <strong style="color: #C5A059;">hasta un 60%</strong> en hoteles, resorts y experiencias alrededor del mundo.',
