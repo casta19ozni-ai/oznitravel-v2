@@ -1,3 +1,5 @@
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -86,10 +88,10 @@
             position: relative;
         }
         .nav-dropdown {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
 
         .contact-dropdown {
             position: absolute;
@@ -128,31 +130,31 @@
             font-weight: 700;
         }
         .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #0f1e3a;
-    min-width: 180px;
-    z-index: 1000;
-    border-radius: 8px;
-    padding: 10px 0;
-}
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #0f1e3a;
+            min-width: 180px;
+            z-index: 1000;
+            border-radius: 8px;
+            padding: 10px 0;
+        }
 
-.dropdown-menu a {
-    display: block;
-    padding: 10px 15px;
-    color: white;
-    text-decoration: none;
-}
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+        }
 
-.dropdown-menu a:hover {
-    background-color: #1c2f5c;
-}
+        .dropdown-menu a:hover {
+            background-color: #1c2f5c;
+        }
 
-.nav-dropdown:hover .dropdown-menu {
-    display: block;
-}
+        .nav-dropdown:hover .dropdown-menu {
+            display: block;
+        }
 
         @media (min-width: 1024px) {
             .nav-menu {
@@ -207,54 +209,56 @@
         }
 
         .btn-outline {
-    background: transparent;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: 2px solid #D4AF37;
-    cursor: pointer;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.05em;
-    transition: all 0.3s;
-}
-a.btn-outline {
-    text-decoration: none;
-}
+            background: transparent;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #D4AF37;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+        a.btn-outline {
+            text-decoration: none;
+        }
         .btn-outline:hover {
             background: #D4AF37;
             color: #0B1D3E;
         }
 
+        /* 🔥 CORRECCIÓN CRÍTICA: Se eliminó overflow: hidden para que el menú no se corte */
         .hero {
             width: 100%;
             height: 100vh;
             position: relative;
-            overflow: hidden;
             margin-top: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: transparent !important; /* Garantiza que el video se vea */
         }
+        
         .hero-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    z-index: 1;
-}
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden; /* El video se contiene aquí, no desborda la página */
+            z-index: 1;
+        }
 
-.bg-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 55%;
-}
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 55%;
+        }
 
         .hero-bg {
             position: absolute;
@@ -332,6 +336,8 @@ a.btn-outline {
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 9999; /* Asegura que los botones y el menú estén por encima de todo */
         }
 
         .modal {
@@ -888,91 +894,274 @@ a.btn-outline {
             opacity: 0.85;
             transform: none;
         }
+
         /* 🔥 AJUSTE PARA MÓVIL */
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
+            .nav-actions {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
 
-    .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-    }
+            #languageSwitcher {
+                font-size: 10px !important;
+                gap: 2px !important;
+                margin-right: 4px !important;
+                white-space: nowrap;
+            }
 
-    #languageSwitcher {
-        font-size: 10px !important;
-        gap: 2px !important;
-        margin-right: 4px !important;
-        white-space: nowrap;
-    }
+            #languageSwitcher button {
+                font-size: 10px;
+                padding: 0;
+            }
 
-    #languageSwitcher button {
-        font-size: 10px;
-        padding: 0;
-    }
+            #downloadAppBtn {
+                padding: 4px 6px !important;
+                font-size: 10px !important;
+                margin-right: 4px !important;
+                white-space: nowrap;
+            }
 
-    #downloadAppBtn {
-        padding: 4px 6px !important;
-        font-size: 10px !important;
-        margin-right: 4px !important;
-        white-space: nowrap;
-    }
+            .menu-toggle {
+                font-size: 20px;
+                padding: 4px;
+            }
+        }
 
-    .menu-toggle {
-        font-size: 20px;
-        padding: 4px;
-    }
-}
-/* 🔥 HAMBURGUESA SOLO EN MÓVIL */
-.menu-toggle {
-    display: none;
-}
+        /* 🔥 HAMBURGUESA SOLO EN MÓVIL */
+        .menu-toggle {
+            display: none;
+        }
 
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-}
-/* 🔥 OCULTAR Y MOSTRAR MENÚ EN MÓVIL */
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
 
-    .nav-menu {
-        display: none;
-    }
+        /* 🔥 OCULTAR Y MOSTRAR MENÚ EN MÓVIL */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
 
-    .nav-menu.active {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        right: 0;
-        width: 100%;
-        background: black;
-        padding: 20px;
-        z-index: 999;
-    }
+            .nav-menu.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: black;
+                padding: 20px;
+                z-index: 999;
+            }
 
-    .nav-menu a {
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.nav-menu a.btn-outline {
-    border-bottom: none;
-}
-@media (max-width: 768px) {
-    .services .grid-2  {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
+            .nav-menu a {
+                padding: 12px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-menu a.btn-outline {
+                border-bottom: none;
+            }
+        }
 
-    .btn-gold {
-        width: 100%;
-        margin-top: 10px;
-        display: block !important;
-    }
-}
-a.btn-outline,
-a.btn-outline:hover {
-  text-decoration: none;
-}
+        @media (max-width: 768px) {
+            .services .grid-2  {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .btn-gold {
+                width: 100%;
+                margin-top: 10px;
+                display: block !important;
+            }
+        }
+
+        a.btn-outline,
+        a.btn-outline:hover {
+            text-decoration: none;
+        }
+
+        /* ==========================================================================
+           🔥 MENÚ DESPLEGABLE (HOVER) - UI/UX EXPERT FIX
+           ========================================================================== */
+        
+        /* Contenedor relativo para que el menú absoluto se posicione respecto a este botón sin romper el flexbox */
+        .hero-dropdown-wrapper {
+            position: relative;
+            display: inline-block; /* Mantiene el tamaño exacto del botón para no romper el flexbox */
+            z-index: 10000;
+        }
+
+        /* Menú principal oculto por defecto */
+        .hero-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            min-width: 320px;
+            z-index: 10001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            text-align: left;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Puente invisible para que el hover no se pierda al bajar el mouse */
+        .hero-dropdown-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 15px;
+        }
+
+        /* Mostrar el menú al hacer hover en el contenedor */
+        .hero-dropdown-wrapper:hover .hero-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Estilos del encabezado del menú */
+        .hd-header {
+            background: #f8f9fa;
+            color: #0B1D3E;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 15px 20px;
+            border-bottom: 2px solid #D4AF37;
+            border-radius: 8px 8px 0 0;
+            margin: 0;
+        }
+
+        /* Estilos de cada ítem del menú principal */
+        .hd-item {
+            position: relative;
+            padding: 12px 20px;
+            color: #1A1A1A;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            background: #ffffff;
+            transition: background 0.2s;
+        }
+
+        .hd-item:hover {
+            background: #f4f7fb;
+            color: #0B1D3E;
+        }
+
+        .hd-arrow {
+            font-size: 0.7rem;
+            color: #D4AF37;
+        }
+
+        /* Submenú lateral oculto por defecto */
+        .hd-submenu {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            margin-left: 5px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            min-width: 340px;
+            z-index: 10002;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Puente invisible para el submenú */
+        .hd-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 10px;
+            height: 100%;
+        }
+
+        /* Mostrar submenú al hacer hover en el ítem */
+        .hd-item:hover .hd-submenu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Enlaces dentro del submenú */
+        .hd-submenu a {
+            display: block;
+            padding: 12px 20px;
+            color: #444;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s, padding-left 0.2s;
+            background: #ffffff;
+        }
+
+        .hd-submenu a:last-child {
+            border-bottom: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .hd-submenu a:hover {
+            background: #f4f7fb;
+            color: #0B1D3E;
+            padding-left: 25px;
+        }
+
+        /* Botón especial de membresía al final del menú */
+        .hd-special {
+            display: block;
+            background: #0B1D3E;
+            color: #D4AF37;
+            text-align: center;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+
+        .hd-special:hover {
+            background: #163269;
+            color: #fff;
+        }
+
+        /* Ajuste para móviles: que el submenú no se salga de la pantalla */
+        @media (max-width: 768px) {
+            .hero-dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90vw;
+                max-width: 350px;
+            }
+            .hd-submenu {
+                left: 0;
+                top: 100%;
+                margin-left: 0;
+                margin-top: 5px;
+                width: 100%;
+            }
+        }
     </style>
     <script>
     (function () {
@@ -991,17 +1180,16 @@ a.btn-outline:hover {
             <a href="#hero" class="nav-logo">Inicio</a>
             <div class="nav-actions">
                 <div class="nav-menu" id="navMenu">
-<div class="nav-dropdown">
-    <span class="nav-link">Bot de Viajes</span>
-
-    <div class="dropdown-menu">
-        <a href="https://kiwi.tpo.lv/9zKWdXYg" target="_blank">✈️ Vuelos</a>
-        <a href="https://klook.tpo.lv/Jn8BIcoZ" target="_blank">🎫 Tours</a>
-        <a href="https://tpo.lv/Aicg51dl" target="_blank">🏨 Hoteles</a>
-        <a href="https://localrent.tpo.lv/Jl2Sejb8" target="_blank">🚗 Autos</a>
-        <a href="https://yesim.tpo.lv/Zqz7mibK" target="_blank">📡 SIM</a>
-    </div>
-</div>
+                    <div class="nav-dropdown">
+                        <span class="nav-link">Bot de Viajes</span>
+                        <div class="dropdown-menu">
+                            <a href="https://kiwi.tpo.lv/9zKWdXYg" target="_blank">✈️ Vuelos</a>
+                            <a href="https://klook.tpo.lv/Jn8BIcoZ" target="_blank">🎫 Tours</a>
+                            <a href="https://tpo.lv/Aicg51dl" target="_blank">🏨 Hoteles</a>
+                            <a href="https://localrent.tpo.lv/Jl2Sejb8" target="_blank">🚗 Autos</a>
+                            <a href="https://yesim.tpo.lv/Zqz7mibK" target="_blank">📡 SIM</a>
+                        </div>
+                    </div>
                     <a class="nav-link" onclick="toggleModal('membershipModal')" data-i18n="nav_crew">Membresías</a>
                     <a class="nav-link" href="#crew-on-shore" data-i18n="nav_concierge">Crew On Shore</a>
                     <div class="nav-contact-wrapper">
@@ -1031,33 +1219,82 @@ a.btn-outline:hover {
         </div>
     </nav>
 
- <section class="hero" id="hero">
-    <div class="hero-bg"></div>
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
 
-    <div class="hero-image">
-        <video autoplay loop muted playsinline class="bg-video">
-            <source src="video-frontal.mp4" type="video/mp4">
-        </video>
-    </div>
+        <div class="hero-image">
+            <video autoplay loop muted playsinline class="bg-video">
+                <source src="video-frontal.mp4" type="video/mp4">
+            </video>
+        </div>
 
-    <div class="hero-overlay"></div>
+        <div class="hero-overlay"></div>
 
-    <div class="hero-content">
-        <h1 class="hero-title">OZNI<span style="color: #D4AF37;">TRAVEL</span></h1>
+        <div class="hero-content">
+            <h1 class="hero-title">OZNI<span style="color: #D4AF37;">TRAVEL</span></h1>
 
-        <p class="hero-subtitle" data-i18n="hero_subtitle">
-            Asistente Inteligente de Viajes 24/7<br>
-            Vuelos • Hoteles • Experiencias • Transporte<br>
-            en cualquier parte del mundo.
-        </p>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">
+                Asistente Inteligente de Viajes 24/7<br>
+                Vuelos • Hoteles • Experiencias • Transporte<br>
+                en cualquier parte del mundo.
+            </p>
 
-        <div class="hero-buttons">
-    <button class="btn-gold" onclick="toggleModal('membershipModal')">
-        DESBLOQUEAR DESCUENTOS EXCLUSIVOS
-    </button>
-    <a href="#crew-on-shore" class="btn-outline">Crew on Shore ⚓</a>
-</div>
-</section>
+            <div class="hero-buttons">
+                
+                <!-- 🔥 CONTENEDOR RELATIVO DEL BOTÓN Y EL MENÚ -->
+                <div class="hero-dropdown-wrapper">
+                    <button class="btn-gold">DESBLOQUEAR DESCUENTOS EXCLUSIVOS</button>
+                    
+                    <!-- MENÚ FLOTANTE ABSOLUTO -->
+                    <div class="hero-dropdown-menu">
+                        <div class="hd-header">Asistente Inteligente de Viajes</div>
+                        
+                        <!-- ÍTEM 1: BOT DE VIAJES -->
+                        <div class="hd-item">
+                            <span>✈️ Bot de Viajes</span> <span class="hd-arrow">▶</span>
+                            <div class="hd-submenu">
+                                <div class="hd-header">Asistente Inteligente de Viajes</div>
+                                <a href="https://kiwi.tpo.lv/9zKWdXYg" target="_blank">✈️ Vuelos</a>
+                                <a href="https://klook.tpo.lv/Jn8BIcoZ" target="_blank">🎫 Tours</a>
+                                <a href="https://tpo.lv/Aicg51dl" target="_blank">🏨 Hoteles</a>
+                                <a href="https://localrent.tpo.lv/Jl2Sejb8" target="_blank">🚗 Autos</a>
+                                <a href="https://yesim.tpo.lv/Zqz7mibK" target="_blank">📡 SIM</a>
+                            </div>
+                        </div>
+
+                        <!-- ÍTEM 2: HERRAMIENTAS DE VIAJE -->
+                        <div class="hd-item">
+                            <span>🧳 Herramientas de Viaje</span> <span class="hd-arrow">▶</span>
+                            <div class="hd-submenu">
+                                <div class="hd-header">Asistente Inteligente de Viajes</div>
+                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Requisitos de viaje (Check-in y migración)')">🛂 Requisitos de viaje (Check-in y migración)</a>
+                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Equipaje permitido (peso y maletas)')">🧳 Equipaje permitido (peso y maletas)</a>
+                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Asistencia silla de ruedas')">♿ Asistencia silla de ruedas</a>
+                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Asistencia tercera edad')">👵 Asistencia tercera edad</a>
+                            </div>
+                        </div>
+
+                        <!-- ÍTEM 3: SERVICIOS EN ECUADOR -->
+                        <div class="hd-item">
+                            <span>🇪🇨 Servicios en Ecuador</span> <span class="hd-arrow">▶</span>
+                            <div class="hd-submenu">
+                                <div class="hd-header">Asistente Inteligente de Viajes</div>
+                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Pasajes Interprovinciales')">🚌 Pasajes Interprovinciales</a>
+                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Transporte Nacional')">🚗 Transporte Nacional</a>
+                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Traslados Privados')">🚖 Traslados Privados</a>
+                            </div>
+                        </div>
+
+                        <!-- ÍTEM 4: MEMBRESÍA -->
+                        <a href="javascript:void(0)" onclick="toggleModal('membershipModal')" class="hd-special">💎 “Viaja con Membresía y Ahorra hasta 60%”</a>
+                    </div>
+                </div>
+
+                <!-- BOTÓN CREW ON SHORE (Intacto y en su lugar) -->
+                <a href="#crew-on-shore" class="btn-outline">Crew on Shore ⚓</a>
+            </div>
+        </div>
+    </section>
 
     <!-- ABOUT / QUIÉNES SOMOS -->
     <section id="about" class="section" style="background: #0B1D3E; color: white;">
@@ -1620,8 +1857,6 @@ a.btn-outline:hover {
             }
         }
 
-
-
         // ===== WHATSAPP HANDLING =====
         function handleWhatsApp(message, meta = {}) {
             const {
@@ -1655,7 +1890,6 @@ a.btn-outline:hover {
                 accion: 'Descargar App',
                 origen: 'header'
             });
-            // The <a> element's href + download attribute will handle the file download.
         }
 
         // ===== FORMULARIOS =====
@@ -1758,16 +1992,12 @@ a.btn-outline:hover {
 
         // ===== ANALÍTICA (PLACEHOLDERS GA4/MIXPANEL) =====
         function trackEvent(eventName, eventParams = {}) {
-            // Placeholder para Google Analytics 4
             if (typeof gtag !== 'undefined') {
                 gtag('event', eventName, eventParams);
             }
-
-            // Placeholder para Mixpanel
             if (typeof mixpanel !== 'undefined') {
                 mixpanel.track(eventName, eventParams);
             }
-
             console.log(`📊 Event: ${eventName}`, eventParams);
         }
 
@@ -1787,7 +2017,6 @@ a.btn-outline:hover {
                 return null;
             }
         }
-
 
         function updateLanguageSwitcherUI(lang) {
             const buttons = document.querySelectorAll('#languageSwitcher button');
@@ -1940,8 +2169,6 @@ a.btn-outline:hover {
                 transport_bus_button: 'Consultar Pasajes',
                 transport_national_button: 'Solicitar Transporte',
                 transport_private_button: 'Reservar Traslado',
-
-                // Add more keys as needed.
             },
             en: {
                 nav_memberships: 'Bot de Viajes',
@@ -1950,7 +2177,7 @@ a.btn-outline:hover {
                 nav_contact: 'Herramientas de Viaje',
                 nav_about: 'Experiencias',
 
-                hero_subtitle: 'Asistente Inteligente de Viajes 24/7<br>Encuentra vuelos, hoteles, transporte y experiencias<br>desde cualquier parte del mundo.',
+                hero_subtitle: 'Asistente Inteligente de Viajes 24/7<br>Encuentra vuelos, hoteles, transporte y experiences<br>desde cualquier parte del mundo.',
                 hero_btn_save: 'I want to save on travel',
                 hero_btn_crew: 'Crew on Shore ⚓',
 
@@ -2156,24 +2383,22 @@ a.btn-outline:hover {
             }
         });
     </script>
-<script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 
-<script>
-function toggleMenu() {
-    const menu = document.getElementById("navMenu");
-    menu.classList.toggle("active");
-}
-</script>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("navMenu");
+            menu.classList.toggle("active");
+        }
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('navMenu').classList.remove('active');
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById('navMenu').classList.remove('active');
+                });
+            });
         });
-    });
-});
-</script>
-
+    </script>
 </body>
 </html>
+```
