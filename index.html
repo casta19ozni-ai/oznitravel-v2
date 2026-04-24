@@ -1757,6 +1757,7 @@
         // ===== CONFIGURACIÓN GLOBAL =====
         const WHATSAPP_NUMBER = '593983977320';
         const APP_DOWNLOAD_URL = './oznitravel-app.apk';
+        const WEBHOOK_URL = 'https://chaffing-naming-bling.ngrok-free.dev/webhook/oznitravel';
         var crewPlayer;
 
         // ===== CRM INTERNO (NO VISIBLE) =====
@@ -1913,17 +1914,18 @@
                 origen: 'concierge_modal'
             });
 
-            handleWhatsApp(message, {
-                destination: destination,
-                actionType: 'Formulario',
-                source: 'concierge_modal',
-                name: name,
-                email: email,
-                phone: phone
-            });
-            toggleModal('conciergeModal');
-            trackEvent('concierge_form_submit');
-        }
+            const userData = {
+    destination: destination,
+    actionType: 'Formulario',
+    source: 'concierge_modal',
+    name: name,
+    email: email,
+    phone: phone
+};
+
+handleWhatsApp(message, userData);
+toggleModal('conciergeModal');
+trackEvent('concierge_whatsapp_submit', userData);
 
         // ===== AFILIADOS =====
         function openAffiliate(url) {
