@@ -1913,8 +1913,7 @@
                 accion: 'Formulario',
                 origen: 'concierge_modal'
             });
-
-            const userData = {
+const userData = {
     destination: destination,
     actionType: 'Formulario',
     source: 'concierge_modal',
@@ -1923,19 +1922,28 @@
     phone: phone
 };
 
-handleWhatsApp(message, userData);
-toggleModal('conciergeModal');
+// 🔥 1. TRACKING inmediato
 trackEvent('concierge_whatsapp_submit', userData);
 
-        // ===== AFILIADOS =====
-        function openAffiliate(url) {
-            window.open(url, '_blank');
-        }
+// 🔥 2. ENVÍO NO BLOQUEANTE (clave para móvil)
+navigator.sendBeacon(
+    'https://chaffing-naming-bling.ngrok-free.dev/webhook/oznitravel',
+    JSON.stringify(userData)
+);
 
-        function openTravelpayouts() {
-            window.open('https://app.travelpayouts.com/whitelabels/web/2947/code', '_blank');
-        }
+// 🔥 3. REDIRECCIÓN (no se bloquea)
+handleWhatsApp(message, userData);
 
+// 🔥 4. CIERRE VISUAL (no interfiere)
+setTimeout(() => {
+    toggleModal('conciergeModal');
+}, 100);
+
+
+// ===== AFILIADOS =====
+function openAffiliate(url) {
+    window.location.href = url;
+}
         // ===== DESCARGA DE APP =====
         function initAppDownloadLink() {
             const downloadButton = document.getElementById('downloadAppBtn');
