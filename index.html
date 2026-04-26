@@ -1,15 +1,3 @@
-Aquí tienes el **HTML COMPLETO** con la integración del sistema de chat IA exactamente como lo solicitaste. 
-
-Se han respetado **todas las reglas críticas**:
-- El video de fondo y el menú desplegable flotante siguen funcionando perfectamente.
-- Se agregó la burbuja de chat flotante (`#ozni-chat`) antes del `</body>`.
-- Se agregaron las funciones `ozniRenderRich` y `ozniLoadMore`.
-- Se integró la validación segura en el `.then()` de `handleIntent`.
-- Se agregó el Auto-Abrir chat al hacer clic en los triggers.
-- Se incluyó un fallback seguro para `ozniRender` y `ozniSend` en caso de que no existieran previamente en tu código, garantizando que el chat funcione sin duplicar ni pisar lógica existente.
-
-Copia y pega este código completo:
-
 ```html
 <!DOCTYPE html>
 <html lang="es">
@@ -239,9 +227,6 @@ Copia y pega este código completo:
             color: #0B1D3E;
         }
 
-        /* ==========================================================================
-           🔥 HERO SECTION & VIDEO BACKGROUND FIX
-           ========================================================================== */
         .hero {
             width: 100%;
             height: 100vh;
@@ -252,17 +237,7 @@ Copia y pega este código completo:
             justify-content: center;
             background: transparent !important;
         }
-
-        .hero-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: linear-gradient(135deg, #0B1D3E 0%, #1E3A5F 100%);
-            z-index: -2;
-        }
-
+        
         .hero-image {
             position: absolute;
             width: 100%;
@@ -270,8 +245,7 @@ Copia y pega este código completo:
             top: 0;
             left: 0;
             overflow: hidden;
-            z-index: -1;
-            pointer-events: none;
+            z-index: 1;
         }
 
         .bg-video {
@@ -281,8 +255,17 @@ Copia y pega este código completo:
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
-            pointer-events: none;
+            object-position: center 55%;
+        }
+
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #0B1D3E 0%, #1E3A5F 100%);
+            z-index: 0;
         }
 
         .hero-overlay {
@@ -291,14 +274,17 @@ Copia y pega este código completo:
             height: 100%;
             top: 0;
             left: 0;
-            background: linear-gradient(to bottom, rgba(11, 29, 62, 0.06), rgba(11, 29, 62, 0.22));
-            z-index: 1;
-            pointer-events: none;
+            background: linear-gradient(
+                to bottom,
+                rgba(11, 29, 62, 0.06),
+                rgba(11, 29, 62, 0.22)
+            );
+            z-index: 2;
         }
 
         .hero-content {
             position: relative;
-            z-index: 10;
+            z-index: 3;
             text-align: center;
             color: white;
             max-width: 800px;
@@ -307,8 +293,14 @@ Copia y pega este código completo:
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-title {
@@ -322,7 +314,9 @@ Copia y pega este código completo:
         }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
+            .hero-title {
+                font-size: 2.5rem;
+            }
         }
 
         .hero-subtitle {
@@ -344,175 +338,6 @@ Copia y pega este código completo:
             z-index: 9999;
         }
 
-        /* ==========================================================================
-           🔥 MENÚ DESPLEGABLE (HOVER) - UI/UX EXPERT FIX
-           ========================================================================== */
-        .hero-dropdown-wrapper {
-            position: relative;
-            display: inline-block;
-            z-index: 10000;
-        }
-
-        .hero-dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-top: 15px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            min-width: 320px;
-            z-index: 10001;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            text-align: left;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .hero-dropdown-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            height: 15px;
-        }
-
-        .hero-dropdown-wrapper:hover .hero-dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .hd-header {
-            background: #f8f9fa;
-            color: #0B1D3E;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 15px 20px;
-            border-bottom: 2px solid #D4AF37;
-            border-radius: 8px 8px 0 0;
-            margin: 0;
-        }
-
-        .hd-item {
-            position: relative;
-            padding: 12px 20px;
-            color: #1A1A1A;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #f0f0f0;
-            background: #ffffff;
-            transition: background 0.2s;
-        }
-
-        .hd-item:hover {
-            background: #f4f7fb;
-            color: #0B1D3E;
-        }
-
-        .hd-arrow {
-            font-size: 0.7rem;
-            color: #D4AF37;
-        }
-
-        .hd-submenu {
-            position: absolute;
-            top: 0;
-            left: 100%;
-            margin-left: 5px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            min-width: 340px;
-            z-index: 10002;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .hd-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: -10px;
-            width: 10px;
-            height: 100%;
-        }
-
-        .hd-item:hover .hd-submenu {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .hd-submenu a {
-            display: block;
-            padding: 12px 20px;
-            color: #444;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background 0.2s, padding-left 0.2s;
-            background: #ffffff;
-        }
-
-        .hd-submenu a:last-child {
-            border-bottom: none;
-            border-radius: 0 0 8px 8px;
-        }
-
-        .hd-submenu a:hover {
-            background: #f4f7fb;
-            color: #0B1D3E;
-            padding-left: 25px;
-        }
-
-        .hd-special {
-            display: block;
-            background: #0B1D3E;
-            color: #D4AF37;
-            text-align: center;
-            padding: 12px;
-            margin: 10px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: background 0.3s;
-        }
-
-        .hd-special:hover {
-            background: #163269;
-            color: #fff;
-        }
-
-        @media (max-width: 768px) {
-            .hero-dropdown-menu {
-                left: 50%;
-                transform: translateX(-50%);
-                width: 90vw;
-                max-width: 350px;
-            }
-            .hd-submenu {
-                left: 0;
-                top: 100%;
-                margin-left: 0;
-                margin-top: 5px;
-                width: 100%;
-            }
-        }
-
-        /* ==========================================================================
-           REST OF CSS
-           ========================================================================== */
         .modal {
             display: none;
             position: fixed;
@@ -550,8 +375,14 @@ Copia y pega este código completo:
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .modal-close {
@@ -1146,6 +977,168 @@ Copia y pega este código completo:
             text-decoration: none;
         }
 
+        .hero-dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+            z-index: 10000;
+        }
+
+        .hero-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            min-width: 320px;
+            z-index: 10001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            text-align: left;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .hero-dropdown-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 15px;
+        }
+
+        .hero-dropdown-wrapper:hover .hero-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hd-header {
+            background: #f8f9fa;
+            color: #0B1D3E;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 15px 20px;
+            border-bottom: 2px solid #D4AF37;
+            border-radius: 8px 8px 0 0;
+            margin: 0;
+        }
+
+        .hd-item {
+            position: relative;
+            padding: 12px 20px;
+            color: #1A1A1A;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            background: #ffffff;
+            transition: background 0.2s;
+        }
+
+        .hd-item:hover {
+            background: #f4f7fb;
+            color: #0B1D3E;
+        }
+
+        .hd-arrow {
+            font-size: 0.7rem;
+            color: #D4AF37;
+        }
+
+        .hd-submenu {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            margin-left: 5px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            min-width: 340px;
+            z-index: 10002;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .hd-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 10px;
+            height: 100%;
+        }
+
+        .hd-item:hover .hd-submenu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hd-submenu a {
+            display: block;
+            padding: 12px 20px;
+            color: #444;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s, padding-left 0.2s;
+            background: #ffffff;
+        }
+
+        .hd-submenu a:last-child {
+            border-bottom: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .hd-submenu a:hover {
+            background: #f4f7fb;
+            color: #0B1D3E;
+            padding-left: 25px;
+        }
+
+        .hd-special {
+            display: block;
+            background: #0B1D3E;
+            color: #D4AF37;
+            text-align: center;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+
+        .hd-special:hover {
+            background: #163269;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .hero-dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90vw;
+                max-width: 350px;
+            }
+            .hd-submenu {
+                left: 0;
+                top: 100%;
+                margin-left: 0;
+                margin-top: 5px;
+                width: 100%;
+            }
+        }
     </style>
     <script>
     (function () {
@@ -1225,28 +1218,24 @@ Copia y pega este código completo:
 
             <div class="hero-buttons">
                 
-                <!-- 🔥 CONTENEDOR RELATIVO DEL BOTÓN Y EL MENÚ -->
                 <div class="hero-dropdown-wrapper">
                     <button class="btn-gold">DESBLOQUEAR DESCUENTOS EXCLUSIVOS</button>
                     
-                    <!-- MENÚ FLOTANTE ABSOLUTO -->
                     <div class="hero-dropdown-menu">
                         <div class="hd-header">Asistente Inteligente de Viajes</div>
                         
-                        <!-- ÍTEM 1: BOT DE VIAJES -->
                         <div class="hd-item">
                             <span>✈️ Bot de Viajes</span> <span class="hd-arrow">▶</span>
                             <div class="hd-submenu">
                                 <div class="hd-header">Asistente Inteligente de Viajes</div>
-                                <a href="#" onclick="handleIntent(event, 'vuelos')">✈️ Vuelos</a>
-                                <a href="#" onclick="handleIntent(event, 'tours')">🎫 Tours</a>
-                                <a href="#" onclick="handleIntent(event, 'hoteles')">🏨 Hoteles</a>
-                                <a href="#" onclick="handleIntent(event, 'autos')">🚗 Autos</a>
-                                <a href="#" onclick="handleIntent(event, 'sim')">📡 SIM</a>
+                                <a href="https://kiwi.tpo.lv/9zKWdXYg" target="_blank">✈️ Vuelos</a>
+                                <a href="https://klook.tpo.lv/Jn8BIcoZ" target="_blank">🎫 Tours</a>
+                                <a href="https://tpo.lv/Aicg51dl" target="_blank">🏨 Hoteles</a>
+                                <a href="https://localrent.tpo.lv/Jl2Sejb8" target="_blank">🚗 Autos</a>
+                                <a href="https://yesim.tpo.lv/Zqz7mibK" target="_blank">📡 SIM</a>
                             </div>
                         </div>
 
-                        <!-- ÍTEM 2: HERRAMIENTAS DE VIAJE -->
                         <div class="hd-item">
                             <span>🧳 Herramientas de Viaje</span> <span class="hd-arrow">▶</span>
                             <div class="hd-submenu">
@@ -1258,7 +1247,6 @@ Copia y pega este código completo:
                             </div>
                         </div>
 
-                        <!-- ÍTEM 3: SERVICIOS EN ECUADOR -->
                         <div class="hd-item">
                             <span>🇪🇨 Servicios en Ecuador</span> <span class="hd-arrow">▶</span>
                             <div class="hd-submenu">
@@ -1269,12 +1257,10 @@ Copia y pega este código completo:
                             </div>
                         </div>
 
-                        <!-- ÍTEM 4: MEMBRESÍA -->
                         <a href="javascript:void(0)" onclick="toggleModal('membershipModal')" class="hd-special">💎 “Viaja con Membresía y Ahorra hasta 60%”</a>
                     </div>
                 </div>
 
-                <!-- BOTÓN CREW ON SHORE (Intacto y en su lugar) -->
                 <a href="#crew-on-shore" class="btn-outline">Crew on Shore ⚓</a>
             </div>
         </div>
@@ -1737,51 +1723,6 @@ Copia y pega este código completo:
         </div>
     </footer>
 
-    <!-- 1. CREAR BURBUJA DE CHAT (AGREGAR ANTES DE </body>) -->
-    <div id="ozni-chat" style="
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 320px;
-        height: 420px;
-        background: rgba(255,255,255,0.98);
-        border-radius: 14px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-        z-index: 9999;
-        display: none;
-        flex-direction: column;
-        overflow: hidden;
-        font-size: 13px;
-    ">
-        <div style="
-            background:#0B1D3E;
-            color:#fff;
-            padding:10px;
-            font-weight:600;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        ">
-            <span>Oznitravel</span>
-            <button onclick="document.getElementById('ozni-chat').style.display='none'" style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">×</button>
-        </div>
-
-        <div id="ozni-messages" style="
-            flex:1;
-            overflow-y:auto;
-            padding:10px;
-            display:flex;
-            flex-direction:column;
-            gap:8px;
-            background:#f7f7f7;
-        "></div>
-
-        <div style="display:flex;border-top:1px solid #eee;">
-            <input id="ozni-input" type="text" placeholder="Escribe..." style="flex:1;border:none;padding:10px;outline:none;">
-            <button onclick="ozniSend()" style="border:none;padding:10px;cursor:pointer;">➤</button>
-        </div>
-    </div>
-
     <script>
         // ===== CONFIGURACIÓN GLOBAL =====
         const WHATSAPP_NUMBER = '593983977320';
@@ -2211,7 +2152,7 @@ Copia y pega este código completo:
                 hero_btn_crew: 'Crew on Shore ⚓',
 
                 about_p1: 'OZNITRAVEL is the bridge between your dreams and the most exclusive destinations in the world. We specialize in providing access to luxury travel through our <strong style="color: #C5A059;">Membership Service</strong>, allowing our clients to save <strong style="color: #C5A059;">up to 60%</strong> on hotels, resorts and experiences worldwide.',
-                about_p2: 'We complement each adventure with <strong style="color: #C5A059;">Crew On Shore</strong>, our on-location support service designed <strong style="color: #C5A059;">exclusivamente para tripulantes</strong> y personal de cruceros. Nos encargamos de la logística, traslados y asistencia personalizada en cada puerto, ensuring that onboard personnel enjoy their time ashore with total comfort and no worries.',
+                about_p2: 'We complement each adventure with <strong style="color: #C5A059;">Crew On Shore</strong>, our on-location support service designed <strong style="color: #C5A059;">exclusively for cruise crew</strong> and staff. We handle logistics, transfers, and personalized assistance at each port, ensuring that onboard personnel enjoy their time ashore with total comfort and no worries.',
 
                 membership_title: 'Travorium Memberships',
                 membership_subtitle: 'GLOBAL ACCESS TO LUXURY TRAVEL WITH DIRECT SAVINGS OF UP TO 60%',
@@ -2428,209 +2369,6 @@ Copia y pega este código completo:
             });
         });
     </script>
-
-<script>
-function handleIntent(event, tipo) {
-    if (event) event.preventDefault();
-
-    const data = {
-        intent: tipo,
-        source: 'boton_principal',
-        timestamp: new Date().toISOString()
-    };
-
-    const fallbackLinks = {
-        vuelos: "https://kiwi.tpo.lv/9zKWdXYg",
-        autos: "https://localrent.tpo.lv/Jl2Sejb8",
-        tours: "https://klook.tpo.lv/Jn8BIcoZ",
-        sim: "https://yesim.tpo.lv/Zqz7mibK",
-        hoteles: "https://tpo.lv/Aicg51dl"
-    };
-
-    const defaultFallback = "https://kiwi.tpo.lv/9zKWdXYg";
-
-    fetch("https://chaffing-naming-bling.ngrok-free.dev/webhook/oznitravel", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-    .then(async (res) => {
-        try {
-            return await res.json();
-        } catch {
-            return null;
-        }
-    })
-    .then(res => {
-        // 6. INTEGRACIÓN EN .then(res => {...})
-        try {
-            if (typeof ozniRenderRich === "function" && res && res.image_url) {
-                ozniRenderRich(res, false);
-            }
-        } catch (e) {}
-
-        if (res && res.type === "redirect" && res.redirect) {
-            window.location.href = res.redirect;       
-        } else if (!res) {
-            window.location.href = fallbackLinks[tipo] || defaultFallback;
-        }
-    })
-    .catch(() => {
-        window.location.href = fallbackLinks[tipo] || defaultFallback;
-    });
-}
-
-// Funciones base del chat (agregadas para garantizar funcionamiento si no existen)
-if (typeof window.ozniRender !== 'function') {
-    window.ozniRender = function(text, isUser = false) {
-        const container = document.getElementById("ozni-messages");
-        if (!container) return;
-        const div = document.createElement("div");
-        div.style.alignSelf = isUser ? "flex-end" : "flex-start";
-        div.style.background = isUser ? "#0B1D3E" : "#eaeaea";
-        div.style.color = isUser ? "#fff" : "#000";
-        div.style.padding = "10px";
-        div.style.borderRadius = "12px";
-        div.style.maxWidth = "85%";
-        div.textContent = text;
-        container.appendChild(div);
-        container.scrollTop = container.scrollHeight;
-    };
-}
-
-if (typeof window.ozniSend !== 'function') {
-    window.ozniSend = async function() {
-        const input = document.getElementById("ozni-input");
-        if (!input || !input.value.trim()) return;
-        const text = input.value.trim();
-        input.value = "";
-        ozniRender(text, true);
-        
-        try {
-            const res = await fetch("https://chaffing-naming-bling.ngrok-free.dev/webhook/oznitravel", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ user_input: text })
-            });
-            const data = await res.json();
-            
-            if (data.message) ozniRender(data.message, false);
-            
-            try {
-                if (typeof ozniRenderRich === "function" && data && data.image_url) {
-                    ozniRenderRich(data, false);
-                }
-            } catch (e) {}
-            
-        } catch (e) {
-            ozniRender("Error de conexión.", false);
-        }
-    };
-}
-
-// 3. NUEVA FUNCIÓN VISUAL (CARDS)
-function ozniRenderRich(data, isUser = false) {
-    const container = document.getElementById("ozni-messages");
-    if (!container) return;
-
-    const div = document.createElement("div");
-
-    div.style.alignSelf = isUser ? "flex-end" : "flex-start";
-    div.style.background = isUser ? "#0B1D3E" : "#eaeaea";
-    div.style.color = isUser ? "#fff" : "#000";
-    div.style.padding = "10px";
-    div.style.borderRadius = "12px";
-    div.style.maxWidth = "85%";
-
-    if (!isUser && typeof data === "object" && data !== null && data.image_url) {
-
-        div.innerHTML = `
-            <img src="${data.image_url}" style="width:100%; border-radius:8px; margin-bottom:8px;">
-            
-            ${data.title ? `<p style="margin:0 0 5px 0;"><b>${data.title}</b></p>` : ""}
-            ${data.price ? `<p style="margin:0 0 5px 0;">${data.price}</p>` : ""}
-            ${data.message ? `<p style="margin:0 0 5px 0;">${data.message}</p>` : ""}
-
-            ${data.link ? `
-                <a href="${data.link}" target="_blank" style="
-                    display:block;
-                    margin-top:8px;
-                    padding:8px;
-                    text-align:center;
-                    background:#0B1D3E;
-                    color:#fff;
-                    border-radius:8px;
-                    text-decoration:none;
-                ">
-                    ${data.cta || "Ver oferta"}
-                </a>
-            ` : ""}
-
-            ${data.more ? `
-                <button onclick="ozniLoadMore('${data.more}')" style="
-                    margin-top:6px;
-                    width:100%;
-                    padding:6px;
-                    border:none;
-                    border-radius:6px;
-                    background:#ddd;
-                    cursor:pointer;
-                ">
-                    Ver más opciones
-                </button>
-            ` : ""}
-        `;
-
-    } else {
-        div.textContent = typeof data === "object" ? data.message : data;
-    }
-
-    container.appendChild(div);
-    container.scrollTop = container.scrollHeight;
-}
-
-// 4. FUNCIÓN “VER MÁS” (PERMITIDA)
-async function ozniLoadMore(query) {
-    try {
-        const res = await fetch("https://chaffing-naming-bling.ngrok-free.dev/webhook/oznitravel", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                user_input: query
-            })
-        });
-
-        const data = await res.json();
-
-        if (Array.isArray(data)) {
-            data.forEach(item => ozniRenderRich(item, false));
-        } else if (data) {
-            ozniRenderRich(data, false);
-        }
-
-    } catch (e) {
-        if(typeof ozniRender === 'function') ozniRender("Error cargando más opciones", false);
-    }
-}
-
-// 7. AUTO-ABRIR CHAT
-document.addEventListener("click", function(e) {
-    const btn = e.target.closest("button, a");
-    if (!btn) return;
-
-    let text = btn.textContent.toLowerCase();
-    text = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-    const triggers = ["vuelos", "hoteles", "autos", "tours", "sim"];
-
-    if (triggers.some(t => text.includes(t))) {
-        const chat = document.getElementById("ozni-chat");
-        if (chat) chat.style.display = "flex";
-    }
-});
-</script>
 </body>
 </html>
 ```
