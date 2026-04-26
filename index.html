@@ -1,4 +1,3 @@
-
 ```html
 <!DOCTYPE html>
 <html lang="es">
@@ -228,7 +227,9 @@
             color: #0B1D3E;
         }
 
-        /* 🔥 CORRECCIÓN CRÍTICA: Se eliminó overflow: hidden para que el menú no se corte */
+        /* ==========================================================================
+           🔥 HERO SECTION & VIDEO BACKGROUND FIX
+           ========================================================================== */
         .hero {
             width: 100%;
             height: 100vh;
@@ -237,27 +238,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: transparent !important; /* Garantiza que el video se vea */
-        }
-        
-        .hero-image {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden; /* El video se contiene aquí, no desborda la página */
-            z-index: 1;
-        }
-
-        .bg-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 55%;
+            background: transparent !important;
         }
 
         .hero-bg {
@@ -267,7 +248,29 @@
             top: 0;
             left: 0;
             background: linear-gradient(135deg, #0B1D3E 0%, #1E3A5F 100%);
-            z-index: 0;
+            z-index: -2;
+        }
+
+        .hero-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            pointer-events: none;
         }
 
         .hero-overlay {
@@ -276,17 +279,14 @@
             height: 100%;
             top: 0;
             left: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(11, 29, 62, 0.06),
-                rgba(11, 29, 62, 0.22)
-            );
-            z-index: 2;
+            background: linear-gradient(to bottom, rgba(11, 29, 62, 0.06), rgba(11, 29, 62, 0.22));
+            z-index: 1;
+            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
-            z-index: 3;
+            z-index: 10;
             text-align: center;
             color: white;
             max-width: 800px;
@@ -295,14 +295,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-title {
@@ -316,9 +310,7 @@
         }
 
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
+            .hero-title { font-size: 2.5rem; }
         }
 
         .hero-subtitle {
@@ -337,9 +329,178 @@
             justify-content: center;
             flex-wrap: wrap;
             position: relative;
-            z-index: 9999; /* Asegura que los botones y el menú estén por encima de todo */
+            z-index: 9999;
         }
 
+        /* ==========================================================================
+           🔥 MENÚ DESPLEGABLE (HOVER) - UI/UX EXPERT FIX
+           ========================================================================== */
+        .hero-dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+            z-index: 10000;
+        }
+
+        .hero-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            min-width: 320px;
+            z-index: 10001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            text-align: left;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .hero-dropdown-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 15px;
+        }
+
+        .hero-dropdown-wrapper:hover .hero-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hd-header {
+            background: #f8f9fa;
+            color: #0B1D3E;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 15px 20px;
+            border-bottom: 2px solid #D4AF37;
+            border-radius: 8px 8px 0 0;
+            margin: 0;
+        }
+
+        .hd-item {
+            position: relative;
+            padding: 12px 20px;
+            color: #1A1A1A;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            background: #ffffff;
+            transition: background 0.2s;
+        }
+
+        .hd-item:hover {
+            background: #f4f7fb;
+            color: #0B1D3E;
+        }
+
+        .hd-arrow {
+            font-size: 0.7rem;
+            color: #D4AF37;
+        }
+
+        .hd-submenu {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            margin-left: 5px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            min-width: 340px;
+            z-index: 10002;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .hd-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 10px;
+            height: 100%;
+        }
+
+        .hd-item:hover .hd-submenu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hd-submenu a {
+            display: block;
+            padding: 12px 20px;
+            color: #444;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s, padding-left 0.2s;
+            background: #ffffff;
+        }
+
+        .hd-submenu a:last-child {
+            border-bottom: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .hd-submenu a:hover {
+            background: #f4f7fb;
+            color: #0B1D3E;
+            padding-left: 25px;
+        }
+
+        .hd-special {
+            display: block;
+            background: #0B1D3E;
+            color: #D4AF37;
+            text-align: center;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+
+        .hd-special:hover {
+            background: #163269;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .hero-dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90vw;
+                max-width: 350px;
+            }
+            .hd-submenu {
+                left: 0;
+                top: 100%;
+                margin-left: 0;
+                margin-top: 5px;
+                width: 100%;
+            }
+        }
+
+        /* ==========================================================================
+           REST OF CSS
+           ========================================================================== */
         .modal {
             display: none;
             position: fixed;
@@ -377,14 +538,8 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-close {
@@ -592,7 +747,6 @@
             color: #666;
         }
 
-        /* Crew on Shore: cards con imagen full-bleed + overlay */
         #crew-on-shore .grid-3 .card {
             position: relative !important;
             height: 320px !important;
@@ -819,7 +973,6 @@
             }
         }
 
-        /* Crew On Shore – card contenedor interactivo */
         .crew-on-shore-card {
             background: white;
             border-left: 4px solid #D4AF37;
@@ -895,7 +1048,6 @@
             transform: none;
         }
 
-        /* 🔥 AJUSTE PARA MÓVIL */
         @media (max-width: 768px) {
             .nav-actions {
                 display: flex;
@@ -928,7 +1080,6 @@
             }
         }
 
-        /* 🔥 HAMBURGUESA SOLO EN MÓVIL */
         .menu-toggle {
             display: none;
         }
@@ -939,7 +1090,6 @@
             }
         }
 
-        /* 🔥 OCULTAR Y MOSTRAR MENÚ EN MÓVIL */
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
@@ -984,184 +1134,6 @@
             text-decoration: none;
         }
 
-        /* ==========================================================================
-           🔥 MENÚ DESPLEGABLE (HOVER) - UI/UX EXPERT FIX
-           ========================================================================== */
-        
-        /* Contenedor relativo para que el menú absoluto se posicione respecto a este botón sin romper el flexbox */
-        .hero-dropdown-wrapper {
-            position: relative;
-            display: inline-block; /* Mantiene el tamaño exacto del botón para no romper el flexbox */
-            z-index: 10000;
-        }
-
-        /* Menú principal oculto por defecto */
-        .hero-dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-top: 15px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            min-width: 320px;
-            z-index: 10001;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            text-align: left;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        /* Puente invisible para que el hover no se pierda al bajar el mouse */
-        .hero-dropdown-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            height: 15px;
-        }
-
-        /* Mostrar el menú al hacer hover en el contenedor */
-        .hero-dropdown-wrapper:hover .hero-dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Estilos del encabezado del menú */
-        .hd-header {
-            background: #f8f9fa;
-            color: #0B1D3E;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 15px 20px;
-            border-bottom: 2px solid #D4AF37;
-            border-radius: 8px 8px 0 0;
-            margin: 0;
-        }
-
-        /* Estilos de cada ítem del menú principal */
-        .hd-item {
-            position: relative;
-            padding: 12px 20px;
-            color: #1A1A1A;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #f0f0f0;
-            background: #ffffff;
-            transition: background 0.2s;
-        }
-
-        .hd-item:hover {
-            background: #f4f7fb;
-            color: #0B1D3E;
-        }
-
-        .hd-arrow {
-            font-size: 0.7rem;
-            color: #D4AF37;
-        }
-
-        /* Submenú lateral oculto por defecto */
-        .hd-submenu {
-            position: absolute;
-            top: 0;
-            left: 100%;
-            margin-left: 5px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            min-width: 340px;
-            z-index: 10002;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        /* Puente invisible para el submenú */
-        .hd-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: -10px;
-            width: 10px;
-            height: 100%;
-        }
-
-        /* Mostrar submenú al hacer hover en el ítem */
-        .hd-item:hover .hd-submenu {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Enlaces dentro del submenú */
-        .hd-submenu a {
-            display: block;
-            padding: 12px 20px;
-            color: #444;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background 0.2s, padding-left 0.2s;
-            background: #ffffff;
-        }
-
-        .hd-submenu a:last-child {
-            border-bottom: none;
-            border-radius: 0 0 8px 8px;
-        }
-
-        .hd-submenu a:hover {
-            background: #f4f7fb;
-            color: #0B1D3E;
-            padding-left: 25px;
-        }
-
-        /* Botón especial de membresía al final del menú */
-        .hd-special {
-            display: block;
-            background: #0B1D3E;
-            color: #D4AF37;
-            text-align: center;
-            padding: 12px;
-            margin: 10px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: background 0.3s;
-        }
-
-        .hd-special:hover {
-            background: #163269;
-            color: #fff;
-        }
-
-        /* Ajuste para móviles: que el submenú no se salga de la pantalla */
-        @media (max-width: 768px) {
-            .hero-dropdown-menu {
-                left: 50%;
-                transform: translateX(-50%);
-                width: 90vw;
-                max-width: 350px;
-            }
-            .hd-submenu {
-                left: 0;
-                top: 100%;
-                margin-left: 0;
-                margin-top: 5px;
-                width: 100%;
-            }
-        }
     </style>
     <script>
     (function () {
@@ -1254,11 +1226,11 @@
                             <span>✈️ Bot de Viajes</span> <span class="hd-arrow">▶</span>
                             <div class="hd-submenu">
                                 <div class="hd-header">Asistente Inteligente de Viajes</div>
-                                <a href="https://kiwi.tpo.lv/9zKWdXYg" target="_blank">✈️ Vuelos</a>
-                                <a href="https://klook.tpo.lv/Jn8BIcoZ" target="_blank">🎫 Tours</a>
-                                <a href="https://tpo.lv/Aicg51dl" target="_blank">🏨 Hoteles</a>
-                                <a href="https://localrent.tpo.lv/Jl2Sejb8" target="_blank">🚗 Autos</a>
-                                <a href="https://yesim.tpo.lv/Zqz7mibK" target="_blank">📡 SIM</a>
+                                <a href="#" onclick="handleIntent(event, 'vuelos')">✈️ Vuelos</a>
+                                <a href="#" onclick="handleIntent(event, 'tours')">🎫 Tours</a>
+                                <a href="#" onclick="handleIntent(event, 'hoteles')">🏨 Hoteles</a>
+                                <a href="#" onclick="handleIntent(event, 'autos')">🚗 Autos</a>
+                                <a href="#" onclick="handleIntent(event, 'sim')">📡 SIM</a>
                             </div>
                         </div>
 
@@ -2126,7 +2098,7 @@
                 nav_support: 'Soporte 24/7',
 
                 crew_availability: 'Disponible actualmente en Guayaquil, con expansión progresiva a otros puertos de Ecuador y Latinoamérica.',
-                crew_selector_title: 'Selecciona el tipo de experiencia que quieres en tu próximo puerto',
+                crew_selector_title: 'Select the type of experience you want at your next port',
                 crew_unmute: 'Activar sonido',
                 crew_mute: 'Silenciar sonido',
 
@@ -2399,6 +2371,53 @@
             });
         });
     </script>
+
+<script>
+function handleIntent(event, tipo) {
+    if (event) event.preventDefault();
+
+    const data = {
+        intent: tipo,
+        source: 'boton_principal',
+        timestamp: new Date().toISOString()
+    };
+
+    const fallbackLinks = {
+        vuelos: "https://kiwi.tpo.lv/9zKWdXYg",
+        autos: "https://localrent.tpo.lv/Jl2Sejb8",
+        tours: "https://klook.tpo.lv/Jn8BIcoZ",
+        sim: "https://yesim.tpo.lv/Zqz7mibK",
+        hoteles: "https://tpo.lv/Aicg51dl"
+    };
+
+    const defaultFallback = "https://kiwi.tpo.lv/9zKWdXYg";
+
+    fetch("https://chaffing-naming-bling.ngrok-free.dev/webhook/oznitravel", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(async (res) => {
+        try {
+            return await res.json();
+        } catch {
+            return null;
+        }
+    })
+    .then(res => {
+        if (res && res.url) {
+            window.location.href = res.url;
+        } else {
+            window.location.href = fallbackLinks[tipo] || defaultFallback;
+        }
+    })
+    .catch(() => {
+        window.location.href = fallbackLinks[tipo] || defaultFallback;
+    });
+}
+</script>
 </body>
 </html>
 ```
