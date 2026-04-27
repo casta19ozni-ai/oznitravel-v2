@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -227,6 +226,9 @@
             color: #0B1D3E;
         }
 
+        /* ==========================================================================
+           🔥 HERO SECTION & VIDEO BACKGROUND FIX
+           ========================================================================== */
         .hero {
             width: 100%;
             height: 100vh;
@@ -237,7 +239,17 @@
             justify-content: center;
             background: transparent !important;
         }
-        
+
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #0B1D3E 0%, #1E3A5F 100%);
+            z-index: -2;
+        }
+
         .hero-image {
             position: absolute;
             width: 100%;
@@ -245,7 +257,8 @@
             top: 0;
             left: 0;
             overflow: hidden;
-            z-index: 1;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .bg-video {
@@ -256,16 +269,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center 55%;
-        }
-
-        .hero-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: linear-gradient(135deg, #0B1D3E 0%, #1E3A5F 100%);
-            z-index: 0;
+            pointer-events: none;
         }
 
         .hero-overlay {
@@ -274,17 +278,14 @@
             height: 100%;
             top: 0;
             left: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(11, 29, 62, 0.06),
-                rgba(11, 29, 62, 0.22)
-            );
-            z-index: 2;
+            background: linear-gradient(to bottom, rgba(11, 29, 62, 0.06), rgba(11, 29, 62, 0.22));
+            z-index: 1;
+            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
-            z-index: 3;
+            z-index: 10;
             text-align: center;
             color: white;
             max-width: 800px;
@@ -293,14 +294,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-title {
@@ -314,9 +309,7 @@
         }
 
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
+            .hero-title { font-size: 2.5rem; }
         }
 
         .hero-subtitle {
@@ -338,6 +331,175 @@
             z-index: 9999;
         }
 
+        /* ==========================================================================
+           🔥 MENÚ DESPLEGABLE (HOVER) - UI/UX EXPERT FIX
+           ========================================================================== */
+        .hero-dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+            z-index: 10000;
+        }
+
+        .hero-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            min-width: 320px;
+            z-index: 10001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            text-align: left;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .hero-dropdown-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 15px;
+        }
+
+        .hero-dropdown-wrapper:hover .hero-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hd-header {
+            background: #f8f9fa;
+            color: #0B1D3E;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 15px 20px;
+            border-bottom: 2px solid #D4AF37;
+            border-radius: 8px 8px 0 0;
+            margin: 0;
+        }
+
+        .hd-item {
+            position: relative;
+            padding: 12px 20px;
+            color: #1A1A1A;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            background: #ffffff;
+            transition: background 0.2s;
+        }
+
+        .hd-item:hover {
+            background: #f4f7fb;
+            color: #0B1D3E;
+        }
+
+        .hd-arrow {
+            font-size: 0.7rem;
+            color: #D4AF37;
+        }
+
+        .hd-submenu {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            margin-left: 5px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            min-width: 340px;
+            z-index: 10002;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .hd-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 10px;
+            height: 100%;
+        }
+
+        .hd-item:hover .hd-submenu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hd-submenu a {
+            display: block;
+            padding: 12px 20px;
+            color: #444;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s, padding-left 0.2s;
+            background: #ffffff;
+        }
+
+        .hd-submenu a:last-child {
+            border-bottom: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .hd-submenu a:hover {
+            background: #f4f7fb;
+            color: #0B1D3E;
+            padding-left: 25px;
+        }
+
+        .hd-special {
+            display: block;
+            background: #0B1D3E;
+            color: #D4AF37;
+            text-align: center;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+
+        .hd-special:hover {
+            background: #163269;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .hero-dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90vw;
+                max-width: 350px;
+            }
+            .hd-submenu {
+                left: 0;
+                top: 100%;
+                margin-left: 0;
+                margin-top: 5px;
+                width: 100%;
+            }
+        }
+
+        /* ==========================================================================
+           REST OF CSS
+           ========================================================================== */
         .modal {
             display: none;
             position: fixed;
@@ -375,14 +537,8 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-close {
@@ -976,169 +1132,6 @@
         a.btn-outline:hover {
             text-decoration: none;
         }
-
-        .hero-dropdown-wrapper {
-            position: relative;
-            display: inline-block;
-            z-index: 10000;
-        }
-
-        .hero-dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-top: 15px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            min-width: 320px;
-            z-index: 10001;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            text-align: left;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .hero-dropdown-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            height: 15px;
-        }
-
-        .hero-dropdown-wrapper:hover .hero-dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .hd-header {
-            background: #f8f9fa;
-            color: #0B1D3E;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 15px 20px;
-            border-bottom: 2px solid #D4AF37;
-            border-radius: 8px 8px 0 0;
-            margin: 0;
-        }
-
-        .hd-item {
-            position: relative;
-            padding: 12px 20px;
-            color: #1A1A1A;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #f0f0f0;
-            background: #ffffff;
-            transition: background 0.2s;
-        }
-
-        .hd-item:hover {
-            background: #f4f7fb;
-            color: #0B1D3E;
-        }
-
-        .hd-arrow {
-            font-size: 0.7rem;
-            color: #D4AF37;
-        }
-
-        .hd-submenu {
-            position: absolute;
-            top: 0;
-            left: 100%;
-            margin-left: 5px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            min-width: 340px;
-            z-index: 10002;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .hd-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: -10px;
-            width: 10px;
-            height: 100%;
-        }
-
-        .hd-item:hover .hd-submenu {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .hd-submenu a {
-            display: block;
-            padding: 12px 20px;
-            color: #444;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background 0.2s, padding-left 0.2s;
-            background: #ffffff;
-        }
-
-        .hd-submenu a:last-child {
-            border-bottom: none;
-            border-radius: 0 0 8px 8px;
-        }
-
-        .hd-submenu a:hover {
-            background: #f4f7fb;
-            color: #0B1D3E;
-            padding-left: 25px;
-        }
-
-        .hd-special {
-            display: block;
-            background: #0B1D3E;
-            color: #D4AF37;
-            text-align: center;
-            padding: 12px;
-            margin: 10px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: background 0.3s;
-        }
-
-        .hd-special:hover {
-            background: #163269;
-            color: #fff;
-        }
-
-        @media (max-width: 768px) {
-            .hero-dropdown-menu {
-                left: 50%;
-                transform: translateX(-50%);
-                width: 90vw;
-                max-width: 350px;
-            }
-            .hd-submenu {
-                left: 0;
-                top: 100%;
-                margin-left: 0;
-                margin-top: 5px;
-                width: 100%;
-            }
-        }
     </style>
     <script>
     (function () {
@@ -1228,11 +1221,11 @@
                             <span>✈️ Bot de Viajes</span> <span class="hd-arrow">▶</span>
                             <div class="hd-submenu">
                                 <div class="hd-header">Asistente Inteligente de Viajes</div>
-                                <a href="https://kiwi.tpo.lv/9zKWdXYg" target="_blank">✈️ Vuelos</a>
-                                <a href="https://klook.tpo.lv/Jn8BIcoZ" target="_blank">🎫 Tours</a>
-                                <a href="https://tpo.lv/Aicg51dl" target="_blank">🏨 Hoteles</a>
-                                <a href="https://localrent.tpo.lv/Jl2Sejb8" target="_blank">🚗 Autos</a>
-                                <a href="https://yesim.tpo.lv/Zqz7mibK" target="_blank">📡 SIM</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('vuelos', 'Hola, busco vuelos')">✈️ Vuelos</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('tours', 'Hola, busco tours')">🎫 Tours</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('hoteles', 'Hola, busco hoteles')">🏨 Hoteles</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('autos', 'Hola, busco autos de alquiler')">🚗 Autos</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('sim', 'Hola, busco SIM internacional')">📡 SIM</a>
                             </div>
                         </div>
 
@@ -1240,10 +1233,10 @@
                             <span>🧳 Herramientas de Viaje</span> <span class="hd-arrow">▶</span>
                             <div class="hd-submenu">
                                 <div class="hd-header">Asistente Inteligente de Viajes</div>
-                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Requisitos de viaje (Check-in y migración)')">🛂 Requisitos de viaje (Check-in y migración)</a>
-                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Equipaje permitido (peso y maletas)')">🧳 Equipaje permitido (peso y maletas)</a>
-                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Asistencia silla de ruedas')">♿ Asistencia silla de ruedas</a>
-                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Asistencia tercera edad')">👵 Asistencia tercera edad</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('requisitos_viaje', 'Hola, necesito información sobre Requisitos de viaje (Check-in y migración)')">🛂 Requisitos de viaje (Check-in y migración)</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('equipaje', 'Hola, necesito información sobre Equipaje permitido (peso y maletas)')">🧳 Equipaje permitido (peso y maletas)</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('asistencia_silla', 'Hola, necesito información sobre Asistencia silla de ruedas')">♿ Asistencia silla de ruedas</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('asistencia_tercera_edad', 'Hola, necesito información sobre Asistencia tercera edad')">👵 Asistencia tercera edad</a>
                             </div>
                         </div>
 
@@ -1251,17 +1244,17 @@
                             <span>🇪🇨 Servicios en Ecuador</span> <span class="hd-arrow">▶</span>
                             <div class="hd-submenu">
                                 <div class="hd-header">Asistente Inteligente de Viajes</div>
-                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Pasajes Interprovinciales')">🚌 Pasajes Interprovinciales</a>
-                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Transporte Nacional')">🚗 Transporte Nacional</a>
-                                <a href="javascript:void(0)" onclick="handleWhatsApp('Hola, necesito información sobre Traslados Privados')">🚖 Traslados Privados</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('transporte_interprovincial', 'Hola, necesito información sobre Pasajes Interprovinciales')">🚌 Pasajes Interprovinciales</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('transporte_nacional', 'Hola, necesito información sobre Transporte Nacional')">🚗 Transporte Nacional</a>
+                                <a href="javascript:void(0)" onclick="handleSmartButton('traslados_privados', 'Hola, necesito información sobre Traslados Privados')">🚖 Traslados Privados</a>
                             </div>
                         </div>
 
-                        <a href="javascript:void(0)" onclick="toggleModal('membershipModal')" class="hd-special">💎 “Viaja con Membresía y Ahorra hasta 60%”</a>
+                        <a href="javascript:void(0)" onclick="toggleModal('membershipModal'); handleSmartButton('membresias', 'Hola, quiero información sobre membresía Travorium y cómo ahorrar hasta 60%')" class="hd-special">💎 “Viaja con Membresía y Ahorra hasta 60%”</a>
                     </div>
                 </div>
 
-                <a href="#crew-on-shore" class="btn-outline">Crew on Shore ⚓</a>
+                <a href="#crew-on-shore" onclick="handleCrewHeroClick()" class="btn-outline">Crew on Shore ⚓</a>
             </div>
         </div>
     </section>
@@ -1386,7 +1379,7 @@
             </div>
 
             <div style="text-align: center; margin-top: 2rem;">
-                <button class="btn-gold" onclick="handleWhatsApp('Quiero reservar Crew on Shore'); trackEvent('crew_reserve')" data-i18n="crew_btn">BOOK EXPERIENCE VIA WHATSAPP</button>
+                <button class="btn-gold" onclick="handleSmartButton('crew_on_shore', 'Quiero reservar Crew on Shore', {segment: 'crew', priority: 'high'}); trackEvent('crew_reserve')" data-i18n="crew_btn">BOOK EXPERIENCE VIA WHATSAPP</button>
             </div>
         </div>
     </section>
@@ -1621,24 +1614,24 @@
             <div class="card">
                 <h3 data-i18n="transport_bus_title">🚌 Pasajes Interprovinciales</h3>
                 <p data-i18n="transport_bus_desc">Viajes en bus entre ciudades principales de Ecuador. Rutas cómodas y seguras.</p>
-                <a data-i18n="transport_bus_button" class="btn-gold" href="https://wa.me/593983977320?text=Hola, necesito información sobre pasajes interprovinciales" target="_blank" rel="noopener" onclick="trackEvent('transport_bus')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Consultar Pasajes</a>
+                <a data-i18n="transport_bus_button" class="btn-gold" href="javascript:void(0)" onclick="handleSmartButton('transporte_interprovincial', 'Hola, necesito información sobre pasajes interprovinciales'); trackEvent('transport_bus')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Consultar Pasajes</a>
             </div>
 
             <div class="card">
                 <h3 data-i18n="transport_national_title">🚗 Transporte Nacional</h3>
                 <p data-i18n="transport_national_desc">Servicios de taxi, transporte público y opciones personalizadas en todo el país.</p>
-                <a data-i18n="transport_national_button" class="btn-gold" href="https://wa.me/593983977320?text=Hola, necesito transporte nacional en Ecuador" target="_blank" rel="noopener" onclick="trackEvent('transport_national')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Solicitar Transporte</a>
+                <a data-i18n="transport_national_button" class="btn-gold" href="javascript:void(0)" onclick="handleSmartButton('transporte_nacional', 'Hola, necesito transporte nacional en Ecuador'); trackEvent('transport_national')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Solicitar Transporte</a>
             </div>
 
             <div class="card">
                 <h3 data-i18n="transport_private_title">🚖 Traslados Privados</h3>
                 <p data-i18n="transport_private_desc">Vehículos privados con conductor para traslados aeropuerto-hotel y rutas personalizadas.</p>
-                <a data-i18n="transport_private_button" class="btn-gold" href="https://wa.me/593983977320?text=Hola, necesito traslado privado en Ecuador" target="_blank" rel="noopener" onclick="trackEvent('transport_private')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Reservar Traslado</a>
+                <a data-i18n="transport_private_button" class="btn-gold" href="javascript:void(0)" onclick="handleSmartButton('traslados_privados', 'Hola, necesito traslado privado en Ecuador'); trackEvent('transport_private')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;">Reservar Traslado</a>
             </div>
         </div>
 
         <div style="text-align: center; margin-top: 3rem;">
-            <a data-i18n="transport_button" class="btn-gold" href="https://wa.me/593983977320?text=Hola, necesito asistencia con transporte en Ecuador" target="_blank" rel="noopener" onclick="trackEvent('transport_whatsapp')" style="padding: 1rem 2rem;">Contactar para Asistencia de Transporte</a>
+            <a data-i18n="transport_button" class="btn-gold" href="javascript:void(0)" onclick="handleSmartButton('transporte_general', 'Hola, necesito asistencia con transporte en Ecuador'); trackEvent('transport_whatsapp')" style="padding: 1rem 2rem;">Contactar para Asistencia de Transporte</a>
         </div>
     </section>
 
@@ -1722,6 +1715,52 @@
             <p style="font-size: 0.75rem; color: #D4AF37; margin-top: 0.5rem;">Ecuador 🇪🇨 | Guayaquil</p>
         </div>
     </footer>
+
+    <!-- 1. CREAR BURBUJA DE CHAT (AGREGAR ANTES DE </body>) -->
+    <div id="ozni-chat" style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 320px;
+        height: 420px;
+        background: rgba(255,255,255,0.98);
+        border-radius: 14px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+        z-index: 10005;
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        font-size: 13px;
+        font-family: 'Montserrat', sans-serif;
+    ">
+        <div style="
+            background:#0B1D3E;
+            color:#fff;
+            padding:12px 15px;
+            font-weight:600;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        ">
+            <span style="display:flex; align-items:center; gap:8px;">🤖 Asistente OZNITRAVEL</span>
+            <button onclick="document.getElementById('ozni-chat').style.display='none'" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0;line-height:1;">&times;</button>
+        </div>
+
+        <div id="ozni-messages" style="
+            flex:1;
+            overflow-y:auto;
+            padding:15px;
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+            background:#f8f9fa;
+        "></div>
+
+        <div style="display:flex; border-top:1px solid #eee; background:#fff; padding:10px;">
+            <input id="ozni-input" type="text" placeholder="Escribe tu mensaje..." style="flex:1; border:1px solid #ddd; border-radius:20px; padding:8px 15px; outline:none; font-family:inherit; font-size:13px;" onkeypress="if(event.key === 'Enter') ozniSend()">
+            <button onclick="ozniSend()" style="background:#D4AF37; color:#0B1D3E; border:none; border-radius:50%; width:35px; height:35px; margin-left:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-weight:bold;">➤</button>
+        </div>
+    </div>
 
     <script>
         // ===== CONFIGURACIÓN GLOBAL =====
@@ -2369,6 +2408,280 @@
             });
         });
     </script>
+
+<script>
+function handleIntent(event, tipo) {
+    if (event) event.preventDefault();
+
+    const data = {
+        intent: tipo,
+        source: 'boton_principal',
+        timestamp: new Date().toISOString()
+    };
+
+    const fallbackLinks = {
+        vuelos: "https://kiwi.tpo.lv/9zKWdXYg",
+        autos: "https://localrent.tpo.lv/Jl2Sejb8",
+        tours: "https://klook.tpo.lv/Jn8BIcoZ",
+        sim: "https://yesim.tpo.lv/Zqz7mibK",
+        hoteles: "https://tpo.lv/Aicg51dl"
+    };
+
+    const defaultFallback = "https://kiwi.tpo.lv/9zKWdXYg";
+
+    fetch("https://chaffing-naming-bling.ngrok-free.dev/webhook/oznitravel", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(async (res) => {
+        try {
+            return await res.json();
+        } catch {
+            return null;
+        }
+    })
+    .then(res => {
+        // 6. INTEGRACIÓN EN .then(res => {...})
+        try {
+            if (typeof ozniRenderRich === "function" && res && res.image_url) {
+                ozniRenderRich(res, false);
+            }
+        } catch (e) {}
+
+        if (res && res.type === "redirect" && res.redirect) {
+            window.location.href = res.redirect;       
+        } else if (!res) {
+            window.location.href = fallbackLinks[tipo] || defaultFallback;
+        }
+    })
+    .catch(() => {
+        window.location.href = fallbackLinks[tipo] || defaultFallback;
+    });
+}
+
+// Funciones base del chat (agregadas para garantizar funcionamiento si no existen)
+if (typeof window.ozniRender !== 'function') {
+    window.ozniRender = function(text, isUser = false) {
+        const container = document.getElementById("ozni-messages");
+        if (!container) return;
+        const div = document.createElement("div");
+        div.style.alignSelf = isUser ? "flex-end" : "flex-start";
+        div.style.background = isUser ? "#0B1D3E" : "#eaeaea";
+        div.style.color = isUser ? "#fff" : "#000";
+        div.style.padding = "10px";
+        div.style.borderRadius = "12px";
+        div.style.maxWidth = "85%";
+        div.textContent = text;
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
+    };
+}
+
+if (typeof window.ozniSend !== 'function') {
+    window.ozniSend = async function() {
+        const input = document.getElementById("ozni-input");
+        if (!input || !input.value.trim()) return;
+        const text = input.value.trim();
+        input.value = "";
+        ozniRender(text, true);
+        
+        try {
+            const res = await fetch("https://chaffing-naming-bling.ngrok-free.dev/webhook/oznitravel", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_input: text })
+            });
+            const data = await res.json();
+            
+            if (data.message) ozniRender(data.message, false);
+            
+            try {
+                if (typeof ozniRenderRich === "function" && data && data.image_url) {
+                    ozniRenderRich(data, false);
+                }
+            } catch (e) {}
+            
+        } catch (e) {
+            ozniRender("Error de conexión.", false);
+        }
+    };
+}
+
+// 3. NUEVA FUNCIÓN VISUAL (CARDS)
+function ozniRenderRich(data, isUser = false) {
+    const container = document.getElementById("ozni-messages");
+    if (!container) return;
+
+    const div = document.createElement("div");
+
+    div.style.alignSelf = isUser ? "flex-end" : "flex-start";
+    div.style.background = isUser ? "#0B1D3E" : "#eaeaea";
+    div.style.color = isUser ? "#fff" : "#000";
+    div.style.padding = "10px";
+    div.style.borderRadius = "12px";
+    div.style.maxWidth = "85%";
+
+    if (!isUser && typeof data === "object" && data !== null && data.image_url) {
+
+        div.innerHTML = `
+            <img src="${data.image_url}" style="width:100%; border-radius:8px; margin-bottom:8px;">
+            
+            ${data.title ? `<p style="margin:0 0 5px 0;"><b>${data.title}</b></p>` : ""}
+            ${data.price ? `<p style="margin:0 0 5px 0;">${data.price}</p>` : ""}
+            ${data.message ? `<p style="margin:0 0 5px 0;">${data.message}</p>` : ""}
+
+            ${data.link ? `
+                <a href="${data.link}" target="_blank" style="
+                    display:block;
+                    margin-top:8px;
+                    padding:8px;
+                    text-align:center;
+                    background:#0B1D3E;
+                    color:#fff;
+                    border-radius:8px;
+                    text-decoration:none;
+                ">
+                    ${data.cta || "Ver oferta"}
+                </a>
+            ` : ""}
+
+            ${data.more ? `
+                <button onclick="ozniLoadMore('${data.more}')" style="
+                    margin-top:6px;
+                    width:100%;
+                    padding:6px;
+                    border:none;
+                    border-radius:6px;
+                    background:#ddd;
+                    cursor:pointer;
+                ">
+                    Ver más opciones
+                </button>
+            ` : ""}
+        `;
+
+    } else {
+        div.textContent = typeof data === "object" ? data.message : data;
+    }
+
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+}
+
+// 4. FUNCIÓN “VER MÁS” (PERMITIDA)
+async function ozniLoadMore(query) {
+    try {
+        const res = await fetch("https://chaffing-naming-bling.ngrok-free.dev/webhook/oznitravel", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                user_input: query
+            })
+        });
+
+        const data = await res.json();
+
+        if (Array.isArray(data)) {
+            data.forEach(item => ozniRenderRich(item, false));
+        } else if (data) {
+            ozniRenderRich(data, false);
+        }
+
+    } catch (e) {
+        if(typeof ozniRender === 'function') ozniRender("Error cargando más opciones", false);
+    }
+}
+
+// ===== NUEVA FUNCIÓN CENTRAL GLOBAL PARA BOTONES INTELIGENTES =====
+async function handleSmartButton(intent, fallbackMessage, metadata = {}) {
+    // 1. Abrir chat
+    const chat = document.getElementById("ozni-chat");
+    if (chat && chat.style.display !== "flex") {
+        chat.style.display = "flex";
+    }
+
+    // 2. Mensaje inicial
+    let userText = fallbackMessage;
+    if (intent === 'crew_on_shore') {
+        userText = "Hola, soy tripulación. Necesito servicios Crew on Shore (transporte, asistencia, logística en puerto).";
+    }
+    
+    if (typeof window.ozniRender === 'function') {
+        window.ozniRender(userText, true);
+    }
+
+    // 3. Indicador escribiendo
+    const container = document.getElementById("ozni-messages");
+    const typingId = "typing-" + Date.now();
+    if (container) {
+        const typingDiv = document.createElement("div");
+        typingDiv.id = typingId;
+        typingDiv.style.alignSelf = "flex-start";
+        typingDiv.style.background = "#eaeaea";
+        typingDiv.style.color = "#666";
+        typingDiv.style.padding = "10px";
+        typingDiv.style.borderRadius = "12px";
+        typingDiv.style.maxWidth = "85%";
+        typingDiv.style.fontStyle = "italic";
+        typingDiv.style.fontSize = "12px";
+        typingDiv.textContent = "Escribiendo...";
+        container.appendChild(typingDiv);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    // 4. Fetch
+    try {
+        const res = await fetch("https://chaffing-naming-bling.ngrok-free.dev/webhook/oznitravel", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                intent: intent, 
+                user_input: userText, 
+                metadata: metadata,
+                source: 'smart_button',
+                timestamp: new Date().toISOString()
+            })
+        });
+        
+        const tDiv = document.getElementById(typingId);
+        if (tDiv) tDiv.remove();
+
+        if (!res.ok) throw new Error("Network Error");
+        
+        const data = await res.json();
+        
+        if (data && data.message && typeof window.ozniRender === 'function') {
+            window.ozniRender(data.message, false);
+        }
+        if (data && data.image_url && typeof window.ozniRenderRich === 'function') {
+            window.ozniRenderRich(data, false);
+        }
+        
+        if (!data || (!data.message && !data.image_url)) {
+            throw new Error("Invalid Data");
+        }
+
+    } catch (error) {
+        const tDiv = document.getElementById(typingId);
+        if (tDiv) tDiv.remove();
+        
+        if (typeof window.ozniRender === 'function') {
+            window.ozniRender("Error de conexión con el asistente", false);
+        }
+    }
+}
+
+function handleCrewHeroClick() {
+    const chat = document.getElementById("ozni-chat");
+    if (chat && chat.style.display !== "flex") {
+        chat.style.display = "flex";
+    }
+    handleSmartButton('crew_on_shore', 'Hola, soy tripulación. Necesito servicios Crew on Shore (transporte, asistencia, logística en puerto).', {segment: 'crew', priority: 'high'});
+}
+</script>
 </body>
 </html>
 ```
