@@ -2584,12 +2584,11 @@ async function ozniLoadMore(query) {
 
         const data = await res.json();
 
-        if (Array.isArray(data)) {
-            data.forEach(item => ozniRenderRich(item, false));
-        } else if (data) {
-            ozniRenderRich(data, false);
-        }
-
+       if (Array.isArray(data) && data.length > 0) {
+    ozniRenderRich(data[0], false);
+} else if (data) {
+    ozniRenderRich(data, false);
+}
     } catch (e) {
         if(typeof ozniRender === 'function') ozniRender("Error cargando más opciones", false);
     }
