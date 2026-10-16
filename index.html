@@ -1155,7 +1155,7 @@
                         <div class="dropdown-menu">
                             <a href="https://kiwi.tpo.lv/9zKWdXYg" target="_blank">✈️ Vuelos</a>
                             <a href="https://klook.tpo.lv/Jn8BIcoZ" target="_blank">🎫 Tours</a>
-                            <a href="https://tpo.lv/Aicg51dl" target="_blank">🏨 Hoteles</a>
+                            <a href="javascript:void(0)" onclick="handleSmartButton('hoteles', 'Quiero información o reserva de hoteles')">🏨 Hoteles</a>
                             <a href="https://localrent.tpo.lv/Jl2Sejb8" target="_blank">🚗 Autos</a>
                             <a href="https://yesim.tpo.lv/Zqz7mibK" target="_blank">📡 SIM</a>
                         </div>
@@ -1597,7 +1597,7 @@
             <div class="card">
                 <h3 data-i18n="service_hotels_title">🏨 Hoteles Premium</h3>
                 <p data-i18n="service_hotels_desc">Red de hoteles de 4-5 estrellas con tarifas net. Cancelación sin penalidad hasta 48h antes.</p>
-                <a class="btn-gold" href="https://tpo.lv/Aicg51dl" target="_blank" rel="noopener noreferrer" onclick="trackEvent('affiliate_travelpayouts')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;" data-i18n="service_hotels_btn">Ver Hoteles</a>
+                <a class="btn-gold" href="javascript:void(0)" onclick="handleSmartButton('hoteles', 'Quiero opciones de hoteles'); trackEvent('service_hotels')" style="width: 100%; margin-top: 1rem; display: inline-block; text-align: center;" data-i18n="service_hotels_btn">Ver Hoteles</a>
             </div>
 
             <div class="card">
@@ -2424,7 +2424,7 @@ function handleIntent(event, tipo) {
         autos: "https://localrent.tpo.lv/Jl2Sejb8",
         tours: "https://klook.tpo.lv/Jn8BIcoZ",
         sim: "https://yesim.tpo.lv/Zqz7mibK",
-        hoteles: "https://tpo.lv/Aicg51dl"
+        hoteles: "#hoteles"
     };
 
     const defaultFallback = "https://kiwi.tpo.lv/9zKWdXYg";
